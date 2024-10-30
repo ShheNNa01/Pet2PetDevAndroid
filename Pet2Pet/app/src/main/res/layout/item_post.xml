@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:elevation="6dp"
+    android:padding="16dp"
+    android:backgroundTint="#509ca2"
+    android:radius="12dp">
+
+    <!-- Imagen en la parte superior -->
+    <ImageView
+        android:id="@+id/header_image"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/button_logo"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Contenedor Principal -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Imagen del usuario -->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_points"
+            app:tint="#1a1a1a"/>
+
+
+        <!-- Nombre del usuario -->
+        <TextView
+            android:id="@+id/post_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Usuario"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="#ffffff"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/baloo_tamma_regular"/>
+
+        <!-- Descripción de la publicación -->
+        <TextView
+            android:id="@+id/post_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Descripción de la publicación"
+            android:textSize="14sp"
+            android:textColor="#1a1a1a"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/baloo_tamma_regular"/>
+
+        <!-- Imagen de la publicación -->
+        <ImageView
+            android:id="@+id/post_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_foreground"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Sección para los botones de interacción -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Botón "Me gusta" -->
+            <ImageButton
+                android:id="@+id/button_like"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_like"
+                android:contentDescription="Like"
+                app:tint="#D55b49" />
+
+            <!-- Botón "Comentario" -->
+            <ImageButton
+                android:id="@+id/button_comment"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_comment"
+                android:contentDescription="Comment"
+                app:tint="#1a1a1a" />
+
+            <!-- Botón "Compartir" -->
+            <ImageButton
+                android:id="@+id/button_send"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_send"
+                android:contentDescription="Send"
+                app:tint="#1a1a1a" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

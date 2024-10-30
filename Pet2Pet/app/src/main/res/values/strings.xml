@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">FrontPet2Pet</string>
+    <string name="title_home">Pagina Principal</string>
+    <string name="title_dashboard">Tablero</string>
+    <string name="title_notifications">Notificaciones</string>
+    <string name="title_events">Eventos</string>
+    <string name="title_inicia">Inicia Sesion</string>
+
+</resources>

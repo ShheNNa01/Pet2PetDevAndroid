@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity"
+    android:background="@drawable/reg">
+
+    <LinearLayout
+        android:id="@+id/linearLayout7"
+        android:layout_width="409dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="541dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:text="Crea una cuenta nueva"
+            android:textAlignment="center"
+            android:textSize="35dp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/baloo_tamma_regular"
+                android:text="¿Ya estas registrado?,"
+                android:textAlignment="textEnd" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/baloo_tamma_regular"
+                android:text="Inicia sesion !!AQUI¡"
+                android:textColor="#509CA2"
+                android:background="@drawable/text_click_effect"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout9"
+        android:layout_width="409dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="¿Como te llamas?:"
+            android:textSize="20dp"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:layout_marginLeft="20dp"/>
+
+        <EditText
+            android:id="@+id/editTextText2"
+            android:layout_width="360dp"
+            android:layout_height="45dp"
+            android:ems="10"
+            android:inputType="text"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:layout_marginLeft="20dp"
+            android:hint="Por favor indica tu nombre o alias favorito"
+            android:textColor="#757575"
+            android:textColorHint="#BDBDBD"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="409dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout9">
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="¿Nos dices tu Email?:"
+            android:textSize="20dp"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:layout_marginLeft="20dp"
+            />
+
+        <EditText
+            android:id="@+id/editTextTextEmailAddress"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:layout_marginLeft="20dp"
+            android:hint="Inserta un correo valido"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:textColor="#757575"
+            android:textColorHint="#BDBDBD"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout8"
+        android:layout_width="409dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="¿Contraseña?:"
+            android:textSize="20dp"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:layout_marginLeft="20dp"/>
+
+        <EditText
+            android:id="@+id/editTextTextPassword2"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:layout_marginLeft="20dp"
+            android:hint="Un numero,Una letra y un caracter minimo"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:textColor="#757575"
+            android:textColorHint="#BDBDBD"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout10"
+        android:layout_width="409dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="274dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout8">
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:text="¿Cuando cumples años?"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:layout_marginLeft="20dp"
+            android:textSize="20dp"
+            android:layout_height="25dp"/>
+
+        <EditText
+            android:id="@+id/editTextDate"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="date"
+            android:hint="Selecciona una fecha valida"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:textColor="#757575"
+            android:textColorHint="#BDBDBD"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout11"
+        android:layout_width="409dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="196dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout10">
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:text="!!Cuentanos tu raza¡¡"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/editTextText3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:ems="10"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:hint="Especifica tu raza o cruce 🐾🐾"
+            android:inputType="text"
+            android:textColor="#757575"
+            android:textColorHint="#BDBDBD" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="61dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout11"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/buttonCrear"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_background"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:text="🐾CREAR CUENTA🐾"
+            android:textColor="#eeede8"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
