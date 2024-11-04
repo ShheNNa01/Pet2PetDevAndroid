@@ -29,10 +29,10 @@
         android:label="@string/title_events"
         tools:layout="@layout/fragment_events" />
 
-    <fragment
+    <activity
         android:id="@+id/navigation_iniciar"
-        android:name="com.example.frontpet2pet.ui.inicio.inicio_sesion"
+        android:name="com.example.frontpet2pet.ui.inicio.InicioSesion"
         android:label="@string/title_inicia"
-        tools:layout="@layout/fragment_inicio_sesion" />
+        tools:layout="@layout/activity_inicio_sesion" />
 
 </navigation>

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/ini"
     android:fitsSystemWindows="true"
-    tools:context=".ui.inicio.inicio_sesion">
+    tools:context=".ui.inicio.InicioSesion">
 
 
     <androidx.cardview.widget.CardView
@@ -89,7 +89,7 @@
         <EditText
             android:id="@+id/editTextText"
             android:layout_width="300dp"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             android:layout_marginLeft="70dp"
             android:ems="10"
             android:hint="Por favor ingresa tu usuario"
@@ -127,7 +127,7 @@
         <EditText
             android:id="@+id/editTextTextPassword"
             android:layout_width="300dp"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             android:layout_marginLeft="70dp"
             android:ems="10"
             android:hint="**********"
@@ -163,7 +163,7 @@
         <TextView
             android:id="@+id/registrar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             android:background="@drawable/text_click_effect"
             android:clickable="true"
             android:focusable="true"

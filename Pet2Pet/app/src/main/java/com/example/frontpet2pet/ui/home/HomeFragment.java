@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.frontpet2pet.R;
-import com.example.frontpet2pet.ui.inicio.inicio_sesion;
+import com.example.frontpet2pet.ui.inicio.InicioSesion;
 
 import java.util.ArrayList;
 import java.util.List;

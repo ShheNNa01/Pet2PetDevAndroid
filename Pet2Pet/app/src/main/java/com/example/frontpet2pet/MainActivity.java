@@ -39,12 +39,11 @@ public class MainActivity extends AppCompatActivity {
         if (intent != null && intent.getStringExtra("showFragment") != null) {
             String fragmentToShow = intent.getStringExtra("showFragment");
             if (fragmentToShow.equals("inicio_sesion")) {
-                // Cambia al fragmento de inicio de sesión
-                navController.navigate(R.id.navigation_iniciar); // Asegúrate de que este ID corresponde al fragmento correcto en tu archivo de navegación
+                navController.navigate(R.id.navigation_iniciar);
             }
         }
 
-        // Configurar el ImageView para que lleve al inicio de sesión
+        // Configuración del botón del logo para navegar al fragmento de inicio de sesión
         ImageView centerLogoButton = findViewById(R.id.center_logo_button);
         centerLogoButton.setOnClickListener(v -> {
             // Navegar al fragmento de inicio de sesión
@@ -58,3 +57,7 @@ public class MainActivity extends AppCompatActivity {
         return navController.navigateUp() || super.onSupportNavigateUp();
     }
 }
+
+
+
+

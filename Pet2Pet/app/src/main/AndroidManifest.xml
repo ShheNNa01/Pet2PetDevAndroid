@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FrontPet2Pet"
-        tools:targetApi="31">
+        tools:targetApi="31"
+        tools:ignore="ExtraText">
 
         <!-- Splash Screen -->
         <activity
@@ -32,9 +33,9 @@
 
         <!-- Inicio de Sesión -->
         <activity
-            android:name=".ui.inicio.inicio_sesion"
+            android:name=".ui.inicio.InicioSesion"
             android:exported="true"
-            android:label="Inicio Sesion" />
+            android:label="Inicio Sesión" />
 
         <!-- Actividad Principal -->
         <activity

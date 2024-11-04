@@ -1,4 +1,3 @@
-<!-- res/menu/bottom_nav_menu.xml -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/navigation_home"
@@ -16,12 +15,8 @@
         android:id="@+id/navigation_events"
         android:icon="@drawable/baseline_event_24"
         android:title="@string/title_events"/>
-
-
-    <!--
-    Dejo esto por aca por si lo necesito despues como icon.
     <item
-        android:id="@+id/navigation_iniciar"
-        android:icon="@drawable/inicia"
-        android:title="@string/title_inicia"/> -->
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/baseline_person_24"
+        android:title="@string/title_profile"/>
 </menu>

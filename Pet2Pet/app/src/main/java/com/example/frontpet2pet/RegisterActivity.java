@@ -13,7 +13,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.frontpet2pet.ui.inicio.inicio_sesion;
+import com.example.frontpet2pet.ui.inicio.InicioSesion;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -48,7 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
                 v.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Intent intent = new Intent(RegisterActivity.this, inicio_sesion.class);
+                        Intent intent = new Intent(RegisterActivity.this, InicioSesion.class);
                         startActivity(intent);
                         finish();
                     }
