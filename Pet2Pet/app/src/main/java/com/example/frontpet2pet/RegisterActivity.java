@@ -1,9 +1,10 @@
 package com.example.frontpet2pet;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,7 +16,18 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.frontpet2pet.ui.inicio.InicioSesion;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+import java.util.regex.Pattern;
+
 public class RegisterActivity extends AppCompatActivity {
+
+    private EditText etDate;
+    private EditText edtNombre;
+    private EditText edtEmail;
+    private EditText edtPassword1;
+    private EditText edtPasswordConfirm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,45 +44,110 @@ public class RegisterActivity extends AppCompatActivity {
             return insets;
         });
 
+        // Inicializar vistas
         Button crearCuentaButton = findViewById(R.id.buttonCrear);
-        TextView textViewIniciarSesion = findViewById(R.id.textView13); // Asegúrate de que este ID sea correcto
+        TextView textViewIniciarSesion = findViewById(R.id.textView13);
+        etDate = findViewById(R.id.etDate);
+        edtNombre = findViewById(R.id.edtNombre);
+        edtEmail = findViewById(R.id.edtEmail);
+        edtPassword1 = findViewById(R.id.edtPassword1);
+        edtPasswordConfirm = findViewById(R.id.edtpasswordConfirm);
 
-        // Asigna el evento de clic al botón de crear cuenta
-        crearCuentaButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Muestra un Toast con el mensaje de éxito
+        // Evento click para el botón de crear cuenta
+        crearCuentaButton.setOnClickListener(v -> {
+            if (validateForm()) {
+                // Si la validación es exitosa, mostrar mensaje y redirigir
                 Toast.makeText(RegisterActivity.this,
                         "Cuenta creada con éxito. Redirigiendo al inicio de sesión...",
                         Toast.LENGTH_SHORT).show();
 
-                // Redirige al inicio de sesión después de 2 segundos
-                v.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Intent intent = new Intent(RegisterActivity.this, InicioSesion.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                }, 2000);
+                v.postDelayed(() -> {
+                    Intent intent = new Intent(RegisterActivity.this, InicioSesion.class);
+                    startActivity(intent);
+                    finish();
+                }, 3000);
             }
+            // Si la validación falla, ya se mostrarán los mensajes de error en validateForm
         });
 
-        // Configura el clic para textView13
-        textViewIniciarSesion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                intent.putExtra("showFragment", "inicio_sesion"); // Pasa un extra para indicar que quieres mostrar el fragmento
-                startActivity(intent);
-                finish(); // Opcional: cierra la actividad actual
-            }
+        // Configura el clic para el texto de iniciar sesión
+        textViewIniciarSesion.setOnClickListener(v -> {
+            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+            intent.putExtra("showFragment", "inicio_sesion");
+            startActivity(intent);
+            finish();
         });
+
+        // Mostrar el DatePickerDialog al hacer clic en el EditText
+        etDate.setOnClickListener(v -> showDatePickerDialog());
+    }
+
+    private void showDatePickerDialog() {
+        final Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        // Crear el DatePickerDialog y configurarlo en español
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, year1, monthOfYear, dayOfMonth) -> {
+            // Configura el formato de la fecha en español
+            Calendar selectedDate = Calendar.getInstance();
+            selectedDate.set(year1, monthOfYear, dayOfMonth);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", new Locale("es", "ES"));
+            etDate.setText(dateFormat.format(selectedDate.getTime()));
+        }, year, month, day);
+
+        // Solo mayores de 18 años
+        Calendar eighteenYearsAgo = Calendar.getInstance();
+        eighteenYearsAgo.add(Calendar.YEAR, -18);
+        datePickerDialog.getDatePicker().setMaxDate(eighteenYearsAgo.getTimeInMillis());
+
+        datePickerDialog.show();
     }
 
     @Override
     public boolean onSupportNavigateUp() {
         finish();
         return true;
+    }
+
+    private boolean validateForm() {
+        String nombre = edtNombre.getText().toString().trim();
+        String email = edtEmail.getText().toString().trim();
+        String password = edtPassword1.getText().toString().trim();
+        String confirmPassword = edtPasswordConfirm.getText().toString().trim();
+        String fechaNacimiento = etDate.getText().toString().trim();
+
+        if (nombre.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || fechaNacimiento.isEmpty()) {
+            Toast.makeText(this, "Por favor, completa todos los campos del formulario.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (!isValidEmail(email)) {
+            Toast.makeText(this, "Ingresa un correo electrónico válido.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (!password.equals(confirmPassword)) {
+            Toast.makeText(this, "Las contraseñas no coinciden.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (!isValidPassword(password)) {
+            Toast.makeText(this, "La contraseña debe tener al menos 8 caracteres, incluir un número, una letra mayúscula y un carácter especial.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean isValidEmail(String email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+    private boolean isValidPassword(String password) {
+        // Validación de contraseña: mínimo 8 caracteres, al menos un número, una letra mayúscula y un carácter especial
+        String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).{8,}$";
+        return Pattern.compile(passwordPattern).matcher(password).matches();
     }
 }

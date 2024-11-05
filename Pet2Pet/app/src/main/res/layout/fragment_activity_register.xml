@@ -85,7 +85,7 @@
             android:layout_marginLeft="20dp"/>
 
         <EditText
-            android:id="@+id/editTextText2"
+            android:id="@+id/edtNombre"
             android:layout_width="360dp"
             android:layout_height="45dp"
             android:ems="10"
@@ -122,7 +122,7 @@
             />
 
         <EditText
-            android:id="@+id/editTextTextEmailAddress"
+            android:id="@+id/edtEmail"
             android:layout_width="360dp"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -160,7 +160,7 @@
             android:layout_marginLeft="20dp"/>
 
         <EditText
-            android:id="@+id/editTextTextPassword2"
+            android:id="@+id/edtPassword1"
             android:layout_width="360dp"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -188,25 +188,26 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout8">
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/textView17"
             android:layout_width="match_parent"
-            android:text="¿Cuando cumples años?"
-            android:fontFamily="@font/baloo_tamma_regular"
-            android:layout_marginLeft="20dp"
+            android:layout_height="25dp"
+            android:text="Confirma tu contraseña:"
             android:textSize="20dp"
-            android:layout_height="25dp"/>
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:layout_marginLeft="20dp"/>
 
         <EditText
-            android:id="@+id/editTextDate"
+            android:id="@+id/edtpasswordConfirm"
             android:layout_width="360dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="date"
-            android:hint="Selecciona una fecha valida"
+            android:inputType="textPassword"
             android:layout_marginLeft="20dp"
+            android:hint="Un numero,Una letra y un caracter minimo"
             android:fontFamily="@font/baloo_tamma_regular"
             android:textColor="#757575"
-            android:textColorHint="#BDBDBD"/>
+            android:textColorHint="#BDBDBD"
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -228,20 +229,32 @@
             android:layout_height="25dp"
             android:layout_marginLeft="20dp"
             android:fontFamily="@font/baloo_tamma_regular"
-            android:text="!!Cuentanos tu raza¡¡"
+            android:text="Fecha de nacimiento"
             android:textSize="20dp" />
 
         <EditText
-            android:id="@+id/editTextText3"
-            android:layout_width="match_parent"
+            android:id="@+id/etDate"
+            android:layout_width="360dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:ems="10"
-            android:fontFamily="@font/baloo_tamma_regular"
-            android:hint="Especifica tu raza o cruce 🐾🐾"
-            android:inputType="text"
-            android:textColor="#757575"
-            android:textColorHint="#BDBDBD" />
+            android:focusable="false"
+            android:hint="Seleccionar fecha" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardCalendar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <CalendarView
+                android:id="@+id/calendarView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
 
     <LinearLayout
