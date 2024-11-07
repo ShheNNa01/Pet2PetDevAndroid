@@ -166,7 +166,7 @@
             android:ems="10"
             android:inputType="textPassword"
             android:layout_marginLeft="20dp"
-            android:hint="Un numero,Una letra y un caracter minimo"
+            android:hint="Numero,Minuscula,Mayuscula y caracter"
             android:fontFamily="@font/baloo_tamma_regular"
             android:textColor="#757575"
             android:textColorHint="#BDBDBD"
