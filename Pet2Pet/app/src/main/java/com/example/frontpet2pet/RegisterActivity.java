@@ -78,7 +78,7 @@ public class RegisterActivity extends AppCompatActivity {
             finish();
         });
 
-        // Mostrar el DatePickerDialog al hacer clic en el EditText
+        // Mostrar el DatePickerDialog (Calendario) al hacer clic en el EditText
         etDate.setOnClickListener(v -> showDatePickerDialog());
     }
 
@@ -88,7 +88,7 @@ public class RegisterActivity extends AppCompatActivity {
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        // Crear el DatePickerDialog y configurarlo en español
+        // Crear el DatePickerDialog (Calendario) y configurarlo en español
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, year1, monthOfYear, dayOfMonth) -> {
             // Configura el formato de la fecha en español
             Calendar selectedDate = Calendar.getInstance();
