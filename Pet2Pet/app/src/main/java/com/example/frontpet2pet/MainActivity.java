@@ -43,12 +43,12 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        // Configuración del botón del logo para navegar al fragmento de inicio de sesión
-        ImageView centerLogoButton = findViewById(R.id.center_logo_button);
-        centerLogoButton.setOnClickListener(v -> {
+        // Configuración del botón del logo para navegar al fragmento de inicio de sesión (LO COMENTO MIENTRAS DEFINIMOS EL PROCESO DEL LOGRO)
+        //ImageView centerLogoButton = findViewById(R.id.center_logo_button);
+        //centerLogoButton.setOnClickListener(v -> {
             // Navegar al fragmento de inicio de sesión
-            navController.navigate(R.id.navigation_iniciar); // Cambia este ID al correcto
-        });
+            //navController.navigate(R.id.navigation_iniciar); // Cambia este ID al correcto
+        //});
     }
 
     @Override

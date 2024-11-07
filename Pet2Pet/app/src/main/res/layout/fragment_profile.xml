@@ -2,19 +2,27 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/profilemaq">
 
     <!-- Botón del logo en el centro -->
-    <ImageView
-        android:id="@+id/center_logo_button"
+    <ImageButton
+        android:id="@+id/btnzp"
+        android:layout_width="138dp"
+        android:layout_height="131dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="599dp"
+        android:layout_marginEnd="137dp"
+        android:layout_marginBottom="1dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerInside"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:elevation="6dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/button_logo"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/zonapet" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

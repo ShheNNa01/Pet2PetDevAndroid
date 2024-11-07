@@ -41,4 +41,11 @@
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 
+    <fragment
+        android:id="@+id/navigation_zonepet"
+        android:name="com.example.frontpet2pet.ui.profile.ZonaPetFragment"
+        android:label="zonepet"
+        tools:layout="@layout/fragment_zonepet" />
+
+
 </navigation>

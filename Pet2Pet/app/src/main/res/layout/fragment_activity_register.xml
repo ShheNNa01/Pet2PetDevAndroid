@@ -92,7 +92,7 @@
             android:inputType="text"
             android:fontFamily="@font/baloo_tamma_regular"
             android:layout_marginLeft="20dp"
-            android:hint="Por favor indica tu nombre o alias favorito"
+            android:hint="Indica que nombre quieres ver en la app"
             android:textColor="#757575"
             android:textColorHint="#BDBDBD"/>
     </LinearLayout>
@@ -178,50 +178,41 @@
         android:id="@+id/linearLayout10"
         android:layout_width="409dp"
         android:layout_height="75dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="274dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout8">
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="384dp">
 
         <TextView
             android:id="@+id/textView17"
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:text="Confirma tu contraseña:"
-            android:textSize="20dp"
+            android:layout_marginLeft="20dp"
             android:fontFamily="@font/baloo_tamma_regular"
-            android:layout_marginLeft="20dp"/>
+            android:text="Confirma tu contraseña:"
+            android:textSize="20dp" />
 
         <EditText
             android:id="@+id/edtpasswordConfirm"
             android:layout_width="360dp"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPassword"
             android:layout_marginLeft="20dp"
-            android:hint="Un numero,Una letra y un caracter minimo"
+            android:ems="10"
             android:fontFamily="@font/baloo_tamma_regular"
+            android:hint="Un numero,Una letra y un caracter minimo"
+            android:inputType="textPassword"
             android:textColor="#757575"
-            android:textColorHint="#BDBDBD"
-            />
+            android:textColorHint="#BDBDBD" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout11"
         android:layout_width="409dp"
         android:layout_height="75dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="196dp"
+        android:layout_marginEnd="2dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout10">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout13">
 
         <TextView
             android:id="@+id/textView7"
@@ -238,12 +229,16 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:focusable="false"
-            android:hint="Seleccionar fecha" />
+            android:hint="Seleccionar fecha"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:textColor="#757575"
+            android:textColorHint="#BDBDBD"/>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardCalendar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:layout_marginTop="8dp"
             android:visibility="gone"
             app:cardCornerRadius="8dp"
@@ -258,18 +253,19 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout12"
         android:layout_width="409dp"
         android:layout_height="75dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="60dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="61dp"
+        android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout11"
-        android:gravity="center">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout11">
 
         <Button
             android:id="@+id/buttonCrear"
@@ -282,6 +278,44 @@
             android:textSize="20dp"
             android:textStyle="bold" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout13"
+        android:layout_width="409dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="15dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout10">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="Nombre Completo"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:textSize="20dp"/>
+
+        <EditText
+            android:id="@+id/editTextText2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="Por favor ingresa tu nombre de pila"
+            android:textColor="#757575"
+            android:textColorHint="#BDBDBD"
+            android:layout_marginLeft="20dp"
+
+            android:fontFamily="@font/baloo_tamma_regular"
+            />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

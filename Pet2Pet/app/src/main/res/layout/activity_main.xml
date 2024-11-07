@@ -28,7 +28,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Botón del logo en el centro -->
+    <!-- Botón del logo en el centro
     <ImageView
         android:id="@+id/center_logo_button"
         android:layout_width="72dp"
@@ -39,7 +39,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="60dp" />
+        android:layout_marginBottom="60dp" />-->
 
     <!-- Barra de navegación inferior -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -53,5 +53,6 @@
         app:menu="@menu/bottom_nav_menu"
         app:itemIconTint="@android:color/white"
         app:itemTextColor="@android:color/black" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
