@@ -10,7 +10,7 @@ import com.example.frontpet2pet.ui.inicio.InicioSesion;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private static final int SPLASH_TIMEOUT = 3000;
+    private static final int SPLASH_TIMEOUT = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

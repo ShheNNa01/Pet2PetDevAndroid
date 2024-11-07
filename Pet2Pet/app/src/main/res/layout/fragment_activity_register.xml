@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegisterActivity"
-    android:background="@drawable/reg">
+    android:background="@drawable/backreg">
 
     <LinearLayout
         android:id="@+id/linearLayout7"
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/baloo_tamma_regular"
-                android:text="¿Ya estas registrado?,"
+                android:text="¿Ya estas registrado? "
                 android:textAlignment="textEnd" />
 
             <TextView
@@ -54,7 +54,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:fontFamily="@font/baloo_tamma_regular"
-                android:text="Inicia sesion !!AQUI¡"
+                android:text="Inicia sesión"
                 android:textColor="#509CA2"
                 android:background="@drawable/text_click_effect"
                 />
@@ -79,10 +79,10 @@
             android:id="@+id/textView15"
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:text="¿Como te llamas?:"
-            android:textSize="20dp"
+            android:layout_marginLeft="20dp"
             android:fontFamily="@font/baloo_tamma_regular"
-            android:layout_marginLeft="20dp"/>
+            android:text="Nombre de usuario:"
+            android:textSize="20dp" />
 
         <EditText
             android:id="@+id/edtNombre"
@@ -115,7 +115,7 @@
             android:id="@+id/textView14"
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:text="¿Nos dices tu Email?:"
+            android:text="Email:"
             android:textSize="20dp"
             android:fontFamily="@font/baloo_tamma_regular"
             android:layout_marginLeft="20dp"
@@ -154,7 +154,7 @@
             android:id="@+id/textView16"
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:text="¿Contraseña?:"
+            android:text="Contraseña:"
             android:textSize="20dp"
             android:fontFamily="@font/baloo_tamma_regular"
             android:layout_marginLeft="20dp"/>
@@ -229,7 +229,7 @@
             android:layout_height="25dp"
             android:layout_marginLeft="20dp"
             android:fontFamily="@font/baloo_tamma_regular"
-            android:text="Fecha de nacimiento"
+            android:text="Fecha de nacimiento:"
             android:textSize="20dp" />
 
         <EditText

@@ -10,8 +10,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.frontpet2pet.MainActivity;
 import com.example.frontpet2pet.R;
 import com.example.frontpet2pet.RegisterActivity;
+import com.example.frontpet2pet.ui.home.HomeFragment;
 
 public class InicioSesion extends AppCompatActivity {
 
@@ -24,31 +26,35 @@ public class InicioSesion extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio_sesion);
 
-        // Enlazamos los elementos del layout
         textViewCrearCuenta = findViewById(R.id.registrar);
         editTextUsuario = findViewById(R.id.editTextText);
         editTextContraseña = findViewById(R.id.editTextTextPassword);
         buttonCrear = findViewById(R.id.buttonCrear);
 
-        // Listener para crear cuenta
         textViewCrearCuenta.setOnClickListener(v -> {
             v.startAnimation(AnimationUtils.loadAnimation(InicioSesion.this, R.anim.click_alpha_animation));
             startActivity(new Intent(InicioSesion.this, RegisterActivity.class));
         });
 
-        // Listener para el botón de iniciar sesión
         buttonCrear.setOnClickListener(v -> {
             String usuario = editTextUsuario.getText().toString().trim();
             String contraseña = editTextContraseña.getText().toString().trim();
 
-            // Validar campos
             if (usuario.isEmpty() || contraseña.isEmpty()) {
                 Toast.makeText(InicioSesion.this, "Por favor, complete todos los campos.", Toast.LENGTH_SHORT).show();
-            } else {
-                // Aquí puedes implementar la lógica de inicio de sesión
+            } else if (usuario.equals("admin") && contraseña.equals("Admin1+")) {
+                // Suponiendo que la autenticación fue exitosa
                 Toast.makeText(InicioSesion.this, "Iniciando sesión...", Toast.LENGTH_SHORT).show();
-                // Redirigir a la actividad principal
+                // Redirige a MainActivity
+                Intent intent = new Intent(InicioSesion.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                // Mensaje de error si los datos son inválidos
+                Toast.makeText(InicioSesion.this, "Usuario o contraseña incorrectos.", Toast.LENGTH_SHORT).show();
             }
+
         });
     }
 }
+

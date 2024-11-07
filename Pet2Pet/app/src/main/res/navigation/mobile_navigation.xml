@@ -35,4 +35,10 @@
         android:label="@string/title_inicia"
         tools:layout="@layout/activity_inicio_sesion" />
 
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.example.frontpet2pet.ui.profile.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile" />
+
 </navigation>
