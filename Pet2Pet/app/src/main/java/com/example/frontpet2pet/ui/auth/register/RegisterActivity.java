@@ -1,4 +1,4 @@
-package com.example.frontpet2pet;
+package com.example.frontpet2pet.ui.auth.register;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -14,6 +14,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.frontpet2pet.MainActivity;
+import com.example.frontpet2pet.R;
 import com.example.frontpet2pet.ui.inicio.InicioSesion;
 
 import java.text.SimpleDateFormat;
