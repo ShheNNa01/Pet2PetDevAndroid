@@ -20,8 +20,16 @@ public class LoginViewModel extends ViewModel {
     private final MutableLiveData<String> error = new MutableLiveData<>();
     private final MutableLiveData<AuthResponse> loginResult = new MutableLiveData<>();
 
+    public LoginViewModel() {
+        // Inicializar estados
+        isLoading.setValue(false);
+        error.setValue(null);
+        loginResult.setValue(null);
+    }
+
     public void login(String email, String password) {
         isLoading.setValue(true);
+        error.setValue(null);
 
         ApiClient.getInstance().getApi().login(email, password)
                 .enqueue(new Callback<AuthResponse>() {
@@ -30,7 +38,8 @@ public class LoginViewModel extends ViewModel {
                         isLoading.setValue(false);
                         if (response.isSuccessful() && response.body() != null) {
                             AuthResponse authResponse = response.body();
-                            SharedPrefsManager.getInstance().saveToken(authResponse.getAccessToken());
+                            // Guardar el token y datos de usuario
+                            SharedPrefsManager.getInstance().saveUserData(authResponse);
                             loginResult.setValue(authResponse);
                         } else {
                             try {
@@ -54,4 +63,21 @@ public class LoginViewModel extends ViewModel {
     public LiveData<Boolean> getIsLoading() { return isLoading; }
     public LiveData<String> getError() { return error; }
     public LiveData<AuthResponse> getLoginResult() { return loginResult; }
+
+    // Métodos para limpiar datos
+    public void clearError() {
+        error.setValue(null);
+    }
+
+    public void clearLoginResult() {
+        loginResult.setValue(null);
+    }
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        // Limpiar cualquier recurso si es necesario
+        clearError();
+        clearLoginResult();
+    }
 }
