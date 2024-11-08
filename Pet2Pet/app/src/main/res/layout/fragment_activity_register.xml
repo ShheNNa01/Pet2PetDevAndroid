@@ -12,15 +12,12 @@
         android:id="@+id/linearLayout7"
         android:layout_width="409dp"
         android:layout_height="75dp"
-        android:layout_marginStart="1dp"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="541dp"
+        android:layout_marginBottom="8dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout9"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="1dp">
 
         <TextView
             android:id="@+id/textView5"
@@ -51,28 +48,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/text_click_effect"
                 android:clickable="true"
                 android:focusable="true"
                 android:fontFamily="@font/baloo_tamma_regular"
                 android:text="Inicia sesión"
-                android:textColor="#509CA2"
-                android:background="@drawable/text_click_effect"
-                />
+                android:textColor="#509CA2" />
         </LinearLayout>
     </LinearLayout>
+
+    -
 
     <LinearLayout
         android:id="@+id/linearLayout9"
         android:layout_width="409dp"
         android:layout_height="75dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginTop="3dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
 
         <TextView
@@ -88,50 +81,44 @@
             android:id="@+id/edtNombre"
             android:layout_width="360dp"
             android:layout_height="45dp"
-            android:ems="10"
-            android:inputType="text"
-            android:fontFamily="@font/baloo_tamma_regular"
             android:layout_marginLeft="20dp"
+            android:ems="10"
+            android:fontFamily="@font/baloo_tamma_regular"
             android:hint="Indica que nombre quieres ver en la app"
+            android:inputType="text"
             android:textColor="#757575"
-            android:textColorHint="#BDBDBD"/>
+            android:textColorHint="#BDBDBD" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout6"
         android:layout_width="409dp"
         android:layout_height="75dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout9">
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout11"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout13"
+        tools:layout_editor_absoluteX="1dp">
 
         <TextView
             android:id="@+id/textView14"
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:text="Email:"
-            android:textSize="20dp"
-            android:fontFamily="@font/baloo_tamma_regular"
             android:layout_marginLeft="20dp"
-            />
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:text="Email:"
+            android:textSize="20dp" />
 
         <EditText
             android:id="@+id/edtEmail"
             android:layout_width="360dp"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textEmailAddress"
             android:layout_marginLeft="20dp"
-            android:hint="Inserta un correo valido"
+            android:ems="10"
             android:fontFamily="@font/baloo_tamma_regular"
+            android:hint="Inserta un correo valido"
+            android:inputType="textEmailAddress"
             android:textColor="#757575"
-            android:textColorHint="#BDBDBD"/>
+            android:textColorHint="#BDBDBD" />
 
 
     </LinearLayout>
@@ -140,37 +127,30 @@
         android:id="@+id/linearLayout8"
         android:layout_width="409dp"
         android:layout_height="75dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout10"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout9">
 
         <TextView
             android:id="@+id/textView16"
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:text="Contraseña:"
-            android:textSize="20dp"
+            android:layout_marginLeft="20dp"
             android:fontFamily="@font/baloo_tamma_regular"
-            android:layout_marginLeft="20dp"/>
+            android:text="Contraseña:"
+            android:textSize="20dp" />
 
         <EditText
             android:id="@+id/edtPassword1"
             android:layout_width="360dp"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPassword"
             android:layout_marginLeft="20dp"
-            android:hint="Numero,Minuscula,Mayuscula y caracter"
+            android:ems="10"
             android:fontFamily="@font/baloo_tamma_regular"
+            android:hint="Numero,Minuscula,Mayuscula y caracter"
+            android:inputType="textPassword"
             android:textColor="#757575"
-            android:textColorHint="#BDBDBD"
-            />
+            android:textColorHint="#BDBDBD" />
 
     </LinearLayout>
 
@@ -179,8 +159,9 @@
         android:layout_width="409dp"
         android:layout_height="75dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="384dp">
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout13"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout8"
+        tools:layout_editor_absoluteX="1dp">
 
         <TextView
             android:id="@+id/textView17"
@@ -208,11 +189,10 @@
         android:id="@+id/linearLayout11"
         android:layout_width="409dp"
         android:layout_height="75dp"
-        android:layout_marginEnd="2dp"
         android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout13">
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout12"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout6"
+        tools:layout_editor_absoluteX="1dp">
 
         <TextView
             android:id="@+id/textView7"
@@ -223,21 +203,10 @@
             android:text="Fecha de nacimiento:"
             android:textSize="20dp" />
 
-        <EditText
-            android:id="@+id/etDate"
-            android:layout_width="360dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:focusable="false"
-            android:hint="Seleccionar fecha"
-            android:fontFamily="@font/baloo_tamma_regular"
-            android:textColor="#757575"
-            android:textColorHint="#BDBDBD"/>
-
         <androidx.cardview.widget.CardView
             android:id="@+id/cardCalendar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="27dp"
 
             android:layout_marginTop="8dp"
             android:visibility="gone"
@@ -250,22 +219,29 @@
                 android:layout_height="wrap_content" />
 
         </androidx.cardview.widget.CardView>
+
+        <EditText
+            android:id="@+id/etDate"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:focusable="false"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:hint="Seleccionar fecha"
+            android:textColor="#757575"
+            android:textColorHint="#BDBDBD" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout12"
         android:layout_width="409dp"
         android:layout_height="75dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="61dp"
+        android:layout_marginBottom="50dp"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout11">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout11"
+        tools:layout_editor_absoluteX="1dp">
 
         <Button
             android:id="@+id/buttonCrear"
@@ -284,38 +260,32 @@
         android:id="@+id/linearLayout13"
         android:layout_width="409dp"
         android:layout_height="75dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="15dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout11"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout10">
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout10"
+        tools:layout_editor_absoluteX="1dp">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:text="Nombre Completo"
             android:layout_marginLeft="20dp"
             android:fontFamily="@font/baloo_tamma_regular"
-            android:textSize="20dp"/>
+            android:text="Nombre Completo"
+            android:textSize="20dp" />
 
         <EditText
             android:id="@+id/editTextText2"
-            android:layout_width="match_parent"
+            android:layout_width="360dp"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="text"
-            android:hint="Por favor ingresa tu nombre de pila"
-            android:textColor="#757575"
-            android:textColorHint="#BDBDBD"
             android:layout_marginLeft="20dp"
-
+            android:ems="10"
             android:fontFamily="@font/baloo_tamma_regular"
-            />
+            android:hint="Por favor ingresa tu nombre de pila"
+            android:inputType="text"
+            android:textColor="#757575"
+
+            android:textColorHint="#BDBDBD" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
