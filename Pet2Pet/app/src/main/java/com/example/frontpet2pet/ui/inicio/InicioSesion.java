@@ -82,6 +82,7 @@ public class InicioSesion extends AppCompatActivity {
     }
 
     private void handleLoginSuccess(AuthResponse result) {
+
         if (result != null) {
             String welcomeMessage = getString(R.string.welcome_message,
                     result.getUser() != null ? result.getUser().getUserName() : "");

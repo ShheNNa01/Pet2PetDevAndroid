@@ -23,6 +23,13 @@ public class UserResponse {
     private String profilePicture;
     @SerializedName("is_active")
     private boolean isActive;
+    @SerializedName("role_id")
+    private Integer roleId;
+
+    public static class Roles {
+        public static final int ADMIN = 1;
+        public static final int SUPER_ADMIN = 2;
+    }
 
     // Getters y setters
 
@@ -104,5 +111,21 @@ public class UserResponse {
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    public Integer getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
+    }
+
+    public boolean isAdmin() {
+        return roleId != null && (roleId == Roles.ADMIN || roleId == Roles.SUPER_ADMIN);
+    }
+
+    public boolean isSuperAdmin() {
+        return roleId != null && roleId == Roles.SUPER_ADMIN;
     }
 }
