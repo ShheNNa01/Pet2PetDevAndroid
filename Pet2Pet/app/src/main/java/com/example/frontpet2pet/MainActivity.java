@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         return navController.navigateUp() || super.onSupportNavigateUp();
     }
 
+    //Metodo para cerrar sesion
     public void logout() {
         SharedPrefsManager.getInstance().clearSession();
         Intent intent = new Intent(this, InicioSesion.class);

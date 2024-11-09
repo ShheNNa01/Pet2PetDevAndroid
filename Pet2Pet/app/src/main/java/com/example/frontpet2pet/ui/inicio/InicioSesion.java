@@ -30,6 +30,7 @@ public class InicioSesion extends AppCompatActivity {
     private EditText editTextUsuario, editTextContraseña;
     private Button buttonCrear;
     private View progressOverlay;
+    private String welcome_message;
 
     // Lista para mantener referencia a los observers
     private List<Observer<?>> observers = new ArrayList<>();
@@ -51,6 +52,7 @@ public class InicioSesion extends AppCompatActivity {
         editTextContraseña = findViewById(R.id.editTextTextPassword);
         buttonCrear = findViewById(R.id.buttonCrear);
         progressOverlay = findViewById(R.id.progress_overlay);
+        welcome_message = getString(R.string.welcome_message);
     }
 
     private void initializeViewModel() {
@@ -77,7 +79,7 @@ public class InicioSesion extends AppCompatActivity {
 
         Observer<AuthResponse> loginObserver = result -> {
             if (result != null) {
-                Toast.makeText(this, "¡Bienvenido!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, welcome_message, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(InicioSesion.this, MainActivity.class);
                 startActivity(intent);
                 finish();
