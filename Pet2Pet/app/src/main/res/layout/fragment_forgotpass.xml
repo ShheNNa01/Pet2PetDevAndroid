@@ -90,7 +90,6 @@
                 android:textColor="#000000"
                 android:textSize="18sp" />
 
-            <!-- Imagen de la huella de perro -->
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
