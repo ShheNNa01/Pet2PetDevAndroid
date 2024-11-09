@@ -63,26 +63,67 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="75dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="413dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="204dp">
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout15">
 
-        <TextView
-            android:id="@+id/textView19"
+        <!-- Texto y huella de perro arriba del campo de correo electrónico -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Por favor regalanos tu correo :D"
-            android:textAlignment="center"
-            android:layout_gravity="center"
-            android:fontFamily="@font/baloo_tamma_regular"
-            />
+            android:layout_marginBottom="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="Danos tu email"
+                android:textColor="#000000"
+                android:textSize="18sp" />
 
+            <!-- Imagen de la huella de perro -->
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:contentDescription="Huella de perro"
+                android:src="@drawable/huella" />
+        </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editTextEmail"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:hint="Correo electrónico"
+                android:inputType="textEmailAddress"
+                android:padding="10dp" />
+
+            <!-- Botón de imagen para enviar -->
+            <ImageButton
+                android:id="@+id/imageButtonSend"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_send"
+                android:contentDescription="Enviar"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="10dp" />
+        </LinearLayout>
     </LinearLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
