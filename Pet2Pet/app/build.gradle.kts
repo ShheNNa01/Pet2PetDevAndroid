@@ -51,7 +51,7 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
     implementation("com.google.code.gson:gson:2.10.1")
 
-    // Glide para manejo de imágenes
+    // Glide para manejo de imágenes (ya lo tienes, es perfecto para este diseño)
     implementation("com.github.bumptech.glide:glide:4.16.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
 

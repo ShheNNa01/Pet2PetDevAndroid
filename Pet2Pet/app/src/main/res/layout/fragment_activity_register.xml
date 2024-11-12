@@ -12,12 +12,11 @@
         android:id="@+id/linearLayout7"
         android:layout_width="409dp"
         android:layout_height="75dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="2dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout9"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="1dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="70dp">
 
         <TextView
             android:id="@+id/textView5"
@@ -59,132 +58,7 @@
 
     -
 
-    <LinearLayout
-        android:id="@+id/linearLayout9"
-        android:layout_width="409dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="3dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
-
-        <TextView
-            android:id="@+id/textView15"
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:layout_marginLeft="20dp"
-            android:fontFamily="@font/baloo_tamma_regular"
-            android:text="Nombre de usuario:"
-            android:textSize="20dp" />
-
-        <EditText
-            android:id="@+id/edtNombre"
-            android:layout_width="360dp"
-            android:layout_height="45dp"
-            android:layout_marginLeft="20dp"
-            android:ems="10"
-            android:fontFamily="@font/baloo_tamma_regular"
-            android:hint="Indica que nombre quieres ver en la app"
-            android:inputType="text"
-            android:textColor="#757575"
-            android:textColorHint="#BDBDBD" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout6"
-        android:layout_width="409dp"
-        android:layout_height="75dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout11"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout13"
-        tools:layout_editor_absoluteX="1dp">
-
-        <TextView
-            android:id="@+id/textView14"
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:layout_marginLeft="20dp"
-            android:fontFamily="@font/baloo_tamma_regular"
-            android:text="Email:"
-            android:textSize="20dp" />
-
-        <EditText
-            android:id="@+id/edtEmail"
-            android:layout_width="360dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:ems="10"
-            android:fontFamily="@font/baloo_tamma_regular"
-            android:hint="Inserta un correo valido"
-            android:inputType="textEmailAddress"
-            android:textColor="#757575"
-            android:textColorHint="#BDBDBD" />
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout8"
-        android:layout_width="409dp"
-        android:layout_height="75dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout10"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout9">
-
-        <TextView
-            android:id="@+id/textView16"
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:layout_marginLeft="20dp"
-            android:fontFamily="@font/baloo_tamma_regular"
-            android:text="Contraseña:"
-            android:textSize="20dp" />
-
-        <EditText
-            android:id="@+id/edtPassword1"
-            android:layout_width="360dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:ems="10"
-            android:fontFamily="@font/baloo_tamma_regular"
-            android:hint="Numero,Minuscula,Mayuscula y caracter"
-            android:inputType="textPassword"
-            android:textColor="#757575"
-            android:textColorHint="#BDBDBD" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout10"
-        android:layout_width="409dp"
-        android:layout_height="75dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout13"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout8"
-        tools:layout_editor_absoluteX="1dp">
-
-        <TextView
-            android:id="@+id/textView17"
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:layout_marginLeft="20dp"
-            android:fontFamily="@font/baloo_tamma_regular"
-            android:text="Confirma tu contraseña:"
-            android:textSize="20dp" />
-
-        <EditText
-            android:id="@+id/edtpasswordConfirm"
-            android:layout_width="360dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:ems="10"
-            android:fontFamily="@font/baloo_tamma_regular"
-            android:hint="Un numero,Una letra y un caracter minimo"
-            android:inputType="textPassword"
-            android:textColor="#757575"
-            android:textColorHint="#BDBDBD" />
-    </LinearLayout>
-
+    <!-- FECHA DE NACIMIENTO POR MEDIO DE CALENDARIO
     <LinearLayout
         android:id="@+id/linearLayout11"
         android:layout_width="409dp"
@@ -230,6 +104,140 @@
             android:hint="Seleccionar fecha"
             android:textColor="#757575"
             android:textColorHint="#BDBDBD" />
+    </LinearLayout> -->
+
+    <LinearLayout
+        android:id="@+id/linearLayout10"
+        android:layout_width="409dp"
+        android:layout_height="75dp"
+        android:layout_marginEnd="2dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="462dp">
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:text="Confirma tu contraseña:"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/edtpasswordConfirm"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:ems="10"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:hint="Un numero,Una letra y un caracter minimo"
+            android:inputType="textPassword"
+            android:textColor="#757575"
+            android:textColorHint="#BDBDBD" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="409dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="285dp">
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:text="Email:"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/edtEmail"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:ems="10"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:hint="Inserta un correo valido"
+            android:inputType="textEmailAddress"
+            android:textColor="#757575"
+            android:textColorHint="#BDBDBD" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout8"
+        android:layout_width="409dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="370dp">
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:text="Contraseña:"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/edtPassword1"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:ems="10"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:hint="Numero,Minuscula,Mayuscula y caracter"
+            android:inputType="textPassword"
+            android:textColor="#757575"
+            android:textColorHint="#BDBDBD" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout9"
+        android:layout_width="409dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="199dp">
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:text="Nombre de usuario:"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/edtNombre"
+            android:layout_width="360dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="20dp"
+            android:ems="10"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:hint="Indica que nombre quieres ver en la app"
+            android:inputType="text"
+            android:textColor="#757575"
+            android:textColorHint="#BDBDBD" />
     </LinearLayout>
 
     <LinearLayout
@@ -255,37 +263,37 @@
             android:textStyle="bold" />
 
     </LinearLayout>
+    <!-- NOMBRE COMPLETO
+        <LinearLayout
+            android:id="@+id/linearLayout13"
+            android:layout_width="409dp"
+            android:layout_height="75dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout10"
+            tools:layout_editor_absoluteX="1dp">
 
-    <LinearLayout
-        android:id="@+id/linearLayout13"
-        android:layout_width="409dp"
-        android:layout_height="75dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout10"
-        tools:layout_editor_absoluteX="1dp">
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/baloo_tamma_regular"
+                android:text="Nombre Completo"
+                android:textSize="20dp" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:layout_marginLeft="20dp"
-            android:fontFamily="@font/baloo_tamma_regular"
-            android:text="Nombre Completo"
-            android:textSize="20dp" />
+            <EditText
+                android:id="@+id/editTextText2"
+                android:layout_width="360dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:ems="10"
+                android:fontFamily="@font/baloo_tamma_regular"
+                android:hint="Por favor ingresa tu nombre de pila"
+                android:inputType="text"
+                android:textColor="#757575"
 
-        <EditText
-            android:id="@+id/editTextText2"
-            android:layout_width="360dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:ems="10"
-            android:fontFamily="@font/baloo_tamma_regular"
-            android:hint="Por favor ingresa tu nombre de pila"
-            android:inputType="text"
-            android:textColor="#757575"
+                android:textColorHint="#BDBDBD" />
+        </LinearLayout> -->
 
-            android:textColorHint="#BDBDBD" />
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
