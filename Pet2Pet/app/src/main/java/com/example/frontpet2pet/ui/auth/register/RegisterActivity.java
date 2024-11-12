@@ -49,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
         // Inicializar vistas
         Button crearCuentaButton = findViewById(R.id.buttonCrear);
         TextView textViewIniciarSesion = findViewById(R.id.textView13);
-        etDate = findViewById(R.id.etDate);
+        //Se comenta, en lo que validamos el proceso de calendario como lo utilizartemos  etDate = findViewById(R.id.etDate);
         edtNombre = findViewById(R.id.edtNombre);
         edtEmail = findViewById(R.id.edtEmail);
         edtPassword1 = findViewById(R.id.edtPassword1);
