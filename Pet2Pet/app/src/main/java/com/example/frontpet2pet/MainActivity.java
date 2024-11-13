@@ -2,6 +2,7 @@ package com.example.frontpet2pet;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.frontpet2pet.data.local.SharedPrefsManager;
@@ -34,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-
+        //Configuración de la navegación
+        BottomNavigationView navView = binding.navView;
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
                 .build();
@@ -55,11 +56,10 @@ public class MainActivity extends AppCompatActivity {
         // Configuración del botón del logo para navegar al fragmento de inicio de sesión (LO COMENTO MIENTRAS DEFINIMOS EL PROCESO DEL LOGRO)
         //ImageView centerLogoButton = findViewById(R.id.center_logo_button);
         //centerLogoButton.setOnClickListener(v -> {
-            // Navegar al fragmento de inicio de sesión
-            //navController.navigate(R.id.navigation_iniciar); // Cambia este ID al correcto
+        // Navegar al fragmento de inicio de sesión
+        //navController.navigate(R.id.navigation_iniciar); // Cambia este ID al correcto
         //});
     }
-
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
@@ -75,6 +75,10 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 }
+
+
+
+
 
 
 
