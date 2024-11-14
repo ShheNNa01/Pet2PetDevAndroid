@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +33,7 @@ public class InicioSesion extends AppCompatActivity {
     private Button buttonCrear;
     private View progressOverlay;
     private String welcome_message;
+    private TextView ForgotPass;
 
     // Lista para mantener referencia a los observers
     private List<Observer<?>> observers = new ArrayList<>();
@@ -53,6 +56,7 @@ public class InicioSesion extends AppCompatActivity {
         buttonCrear = findViewById(R.id.buttonCrear);
         progressOverlay = findViewById(R.id.progress_overlay);
         welcome_message = getString(R.string.welcome_message);
+        ForgotPass = findViewById(R.id.ForgotPass);
     }
 
     private void initializeViewModel() {
@@ -103,7 +107,27 @@ public class InicioSesion extends AppCompatActivity {
                 viewModel.login(usuario, contraseña);
             }
         });
+
+        TextView forgotPass = findViewById(R.id.ForgotPass);
+        FrameLayout fragmentContainer = findViewById(R.id.fragment_container);
+
+        forgotPass.setOnClickListener(v -> {
+            v.startAnimation(AnimationUtils.loadAnimation(this, R.anim.click_alpha_animation));
+
+            // Hago visible el contenedor para validar si funciona la navegacion.
+            fragmentContainer.getLayoutParams().height = LinearLayout.LayoutParams.MATCH_PARENT;
+            fragmentContainer.setVisibility(View.VISIBLE);
+            fragmentContainer.requestLayout();
+
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new ForgotPass())
+                    .addToBackStack(null)
+                    .commit();
+        });
+
+
     }
+
 
     private boolean validateInput(String usuario, String contraseña) {
         if (usuario.isEmpty() || contraseña.isEmpty()) {

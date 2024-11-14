@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
     // Cambiar la URL base a tu URL de Railway
-    private static final String BASE_URL = "https://pet2petbackdeploy-production.up.railway.app/api/v1/";
+    private static final String BASE_URL = "http://10.0.2.2:8000/api/v1/";
     private static ApiClient instance;
     private final ApiService apiService;
 
