@@ -27,6 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private EditText etDate;
     private EditText edtNombre;
+    private EditText edtApellido;
     private EditText edtEmail;
     private EditText edtPassword1;
     private EditText edtPasswordConfirm;
@@ -48,12 +49,12 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Inicializar vistas
         Button crearCuentaButton = findViewById(R.id.buttonCrear);
-        TextView textViewIniciarSesion = findViewById(R.id.textView13);
-        //Se comenta, en lo que validamos el proceso de calendario como lo utilizartemos  etDate = findViewById(R.id.etDate);
-        edtNombre = findViewById(R.id.edtNombre);
+        TextView textViewIniciarSesion = findViewById(R.id.tvlogin);
+        edtNombre = findViewById(R.id.edtName);
+        edtApellido= findViewById(R.id.edtLastName);
         edtEmail = findViewById(R.id.edtEmail);
-        edtPassword1 = findViewById(R.id.edtPassword1);
-        edtPasswordConfirm = findViewById(R.id.edtpasswordConfirm);
+        edtPassword1 = findViewById(R.id.edtPassword);
+        edtPasswordConfirm = findViewById(R.id.edtpassConfirm);
 
         // Evento click para el botón de crear cuenta
         crearCuentaButton.setOnClickListener(v -> {
@@ -80,32 +81,10 @@ public class RegisterActivity extends AppCompatActivity {
             finish();
         });
 
-        // Mostrar el DatePickerDialog (Calendario) al hacer clic en el EditText
-        etDate.setOnClickListener(v -> showDatePickerDialog());
+
     }
 
-    private void showDatePickerDialog() {
-        final Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        // Crear el DatePickerDialog (Calendario) y configurarlo en español
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, year1, monthOfYear, dayOfMonth) -> {
-            // Configura el formato de la fecha en español
-            Calendar selectedDate = Calendar.getInstance();
-            selectedDate.set(year1, monthOfYear, dayOfMonth);
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", new Locale("es", "ES"));
-            etDate.setText(dateFormat.format(selectedDate.getTime()));
-        }, year, month, day);
-
-        // Solo mayores de 18 años
-        Calendar eighteenYearsAgo = Calendar.getInstance();
-        eighteenYearsAgo.add(Calendar.YEAR, -18);
-        datePickerDialog.getDatePicker().setMaxDate(eighteenYearsAgo.getTimeInMillis());
-
-        datePickerDialog.show();
-    }
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -115,12 +94,13 @@ public class RegisterActivity extends AppCompatActivity {
 
     private boolean validateForm() {
         String nombre = edtNombre.getText().toString().trim();
+        String apellido = edtApellido.getText().toString().trim();
         String email = edtEmail.getText().toString().trim();
         String password = edtPassword1.getText().toString().trim();
         String confirmPassword = edtPasswordConfirm.getText().toString().trim();
         String fechaNacimiento = etDate.getText().toString().trim();
 
-        if (nombre.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || fechaNacimiento.isEmpty()) {
+        if (nombre.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || apellido.isEmpty()) {
             Toast.makeText(this, "Por favor, completa todos los campos del formulario.", Toast.LENGTH_SHORT).show();
             return false;
         }
