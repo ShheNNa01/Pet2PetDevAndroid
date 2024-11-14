@@ -19,7 +19,46 @@ import com.example.frontpet2pet.MainActivity;
 import com.example.frontpet2pet.R;
 
 public class ProfileFragment extends Fragment {
+    /*private RecyclerView rvUserPosts;
+    private PostsAdapter postsAdapter;
+    private List<Post> postsList;
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Inicializar RecyclerView
+        rvUserPosts = view.findViewById(R.id.rvUserPosts);
+        postsList = new ArrayList<>();
+
+        // Configurar Layout Manager - Usamos Linear porque tus posts son cards completas
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        rvUserPosts.setLayoutManager(layoutManager);
+
+        // Configurar Adapter
+        postsAdapter = new PostsAdapter(getContext(), postsList);
+        rvUserPosts.setAdapter(postsAdapter);
+
+        // Opcional: Añadir espacio entre items
+        rvUserPosts.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void getItemOffsets(@NonNull Rect outRect, @NonNull View view,
+                                     @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+                outRect.bottom = 8; // Espacio entre posts
+            }
+        });
+
+        // Cargar posts
+        loadUserPosts();
+    }
+
+    private void loadUserPosts() {
+        // Aquí cargarías los posts del usuario desde tu base de datos
+        // y actualizarías postsList
+        // Al terminar de cargar:
+        postsAdapter.notifyDataSetChanged();
+    }
+}*/
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
