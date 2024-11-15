@@ -23,4 +23,6 @@ public interface ApiService {
             @Field("password") String password
     );
 
+    @POST("auth/register")
+    Call<UserResponse> register(@Body RegisterRequest request);
 }
