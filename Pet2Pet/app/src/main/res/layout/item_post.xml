@@ -4,111 +4,179 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardElevation="6dp"
+    android:layout_margin="12dp"
+    android:background="@drawable/profilemaq"
+    app:cardElevation="8dp"
     app:cardBackgroundColor="#509ca2"
-    app:cardCornerRadius="12dp">
+    app:cardCornerRadius="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="vertical">
 
-        <!-- Imagen en la parte superior -->
-        <ImageView
-            android:id="@+id/header_image"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/button_logo"
-            android:layout_marginBottom="8dp" />
-
-        <!-- Fila de usuario -->
+        <!-- Encabezado del post -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginBottom="8dp">
+            android:padding="12dp"
+            android:gravity="center_vertical">
 
-            <!-- Imagen del usuario -->
-            <ImageView
+            <!-- Foto de perfil del usuario -->
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/user_icon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_points"
-                app:tint="#1a1a1a"
-                android:layout_marginEnd="8dp"/>
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/zonapet"
+                android:contentDescription="Foto de perfil del usuario"
+                app:civ_border_width="2dp"
+                app:civ_border_color="#509ca2"/>
 
-            <!-- Nombre del usuario -->
-            <TextView
-                android:id="@+id/post_user_name"
-                android:layout_width="wrap_content"
+            <!-- Info del usuario -->
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Usuario"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="#ffffff"
-                android:fontFamily="@font/baloo_tamma_regular"/>
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="12dp">
+
+                <TextView
+                    android:id="@+id/post_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="'@Usuario"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#1a1a1a"
+                    android:fontFamily="@font/baloo_tamma_regular"/>
+
+                <TextView
+                    android:id="@+id/post_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hace 2 horas"
+                    android:textSize="12sp"
+                    android:textColor="#757575"
+                    android:fontFamily="@font/baloo_tamma_regular"/>
+            </LinearLayout>
+
+            <!-- Botón de menú -->
+            <ImageButton
+                android:id="@+id/button_menu"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/button_ripple"
+                android:src="@drawable/ic_points"
+                android:contentDescription="Botón Menú"
+                app:tint="#1a1a1a"/>
         </LinearLayout>
 
-        <!-- Descripción de la publicación -->
+        <!-- Imagen principal del post -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/post_image"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_foreground"
+            android:contentDescription="Imagen de la publicación"
+            app:shapeAppearanceOverlay="@style/RoundedImageView"/>
+
+        <!-- Descripción -->
         <TextView
             android:id="@+id/post_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="16dp"
             android:text="Descripción de la publicación"
             android:textSize="14sp"
             android:textColor="#1a1a1a"
-            android:layout_marginBottom="8dp"
             android:fontFamily="@font/baloo_tamma_regular"/>
 
-        <!-- Imagen de la publicación -->
-        <ImageView
-            android:id="@+id/post_image"
+        <!-- Línea divisoria -->
+        <View
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_foreground"
-            android:layout_marginBottom="8dp" />
+            android:layout_height="0.5dp"
+            android:background="#E0E0E0"
+            android:layout_marginHorizontal="16dp"/>
 
-        <!-- Sección para los botones de interacción -->
+        <!-- Botones de interacción -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="start">
+            android:padding="12dp"
+            android:gravity="center_vertical">
 
-            <!-- Botón "Me gusta" -->
-            <ImageButton
-                android:id="@+id/button_like"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/ic_like"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Like"
-                app:tint="#D55b49" />
+            <!-- Contenedor de Me gusta -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
-            <!-- Botón "Comentario" -->
-            <ImageButton
-                android:id="@+id/button_comment"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/ic_comment"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Comment"
-                app:tint="#1a1a1a" />
+                <ImageButton
+                    android:id="@+id/button_like"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/ic_like"
+                    android:background="@drawable/button_ripple"
+                    android:contentDescription="Botón Me gusta"
+                    app:tint="#D55b49"/>
 
-            <!-- Botón "Compartir" -->
+                <TextView
+                    android:id="@+id/like_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1.2K"
+                    android:textSize="14sp"
+                    android:textColor="#1a1a1a"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/baloo_tamma_regular"/>
+            </LinearLayout>
+
+            <!-- Contenedor de Comentarios -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginStart="16dp">
+
+                <ImageButton
+                    android:id="@+id/button_comment"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/ic_comment"
+                    android:background="@drawable/button_ripple"
+                    android:contentDescription="Botón Comentar"
+                    app:tint="#1a1a1a"/>
+
+                <TextView
+                    android:id="@+id/comment_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="234"
+                    android:textSize="14sp"
+                    android:textColor="#1a1a1a"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/baloo_tamma_regular"/>
+            </LinearLayout>
+
+            <!-- Botón Compartir -->
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
             <ImageButton
-                android:id="@+id/button_send"
+                android:id="@+id/button_share"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:src="@drawable/ic_send"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Send"
-                app:tint="#1a1a1a" />
+                android:background="@drawable/button_ripple"
+                android:contentDescription="Botón Compartir"
+                app:tint="#1a1a1a"/>
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
