@@ -108,21 +108,10 @@ public class InicioSesion extends AppCompatActivity {
             }
         });
 
-        TextView forgotPass = findViewById(R.id.ForgotPass);
-        FrameLayout fragmentContainer = findViewById(R.id.fragment_container);
-
-        forgotPass.setOnClickListener(v -> {
+        ForgotPass.setOnClickListener(v -> {
             v.startAnimation(AnimationUtils.loadAnimation(this, R.anim.click_alpha_animation));
-
-            // Hago visible el contenedor para validar si funciona la navegacion.
-            fragmentContainer.getLayoutParams().height = LinearLayout.LayoutParams.MATCH_PARENT;
-            fragmentContainer.setVisibility(View.VISIBLE);
-            fragmentContainer.requestLayout();
-
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, new ForgotPass())
-                    .addToBackStack(null)
-                    .commit();
+            Intent intent = new Intent(InicioSesion.this, ForgotPas.class);  // Aquí se abre la actividad ForgotPas
+            startActivity(intent);
         });
 
 
