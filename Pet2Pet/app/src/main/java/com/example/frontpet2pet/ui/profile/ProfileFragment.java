@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,6 +20,54 @@ import com.example.frontpet2pet.MainActivity;
 import com.example.frontpet2pet.R;
 
 public class ProfileFragment extends Fragment {
+
+    private ImageButton btnZonapet;
+    private Button btnEdit; // Declarar el botón como variable de clase
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        // Inflar el layout para este fragmento
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        // Inicializar las vistas
+        btnZonapet = view.findViewById(R.id.btnzp);
+        btnEdit = view.findViewById(R.id.btnEdit); // Inicializar el botón
+
+        // Configurar los listeners
+        setupClickListeners();
+
+        return view;
+    }
+
+    private void setupClickListeners() {
+        // Configurar el botón de la imagen (zonapet)
+        btnZonapet.setOnClickListener(v -> {
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                NavController navController = Navigation.findNavController(requireActivity(),
+                        R.id.nav_host_fragment_activity_main);
+                navController.navigate(R.id.navigation_zonepet);
+            }, 1000);
+        });
+
+        // Configurar el botón de editar perfil
+        if (btnEdit != null) {
+            btnEdit.setOnClickListener(v -> {
+                try {
+                    NavController navController = Navigation.findNavController(requireActivity(),
+                            R.id.nav_host_fragment_activity_main);
+                    navController.navigate(R.id.action_navigation_profile_to_editProfileFragment);
+                } catch (Exception e) {
+                    Toast.makeText(getContext(), "Error al navegar: " + e.getMessage(),
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            Toast.makeText(getContext(), "Error: Botón de editar no encontrado",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
     /*private RecyclerView rvUserPosts;
     private PostsAdapter postsAdapter;
     private List<Post> postsList;
@@ -59,40 +108,4 @@ public class ProfileFragment extends Fragment {
         postsAdapter.notifyDataSetChanged();
     }
 }*/
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        // Inflar el layout para este fragmento
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
-
-        // Configurar el botón de la imagen (zonapet)
-        ImageButton imageButton = view.findViewById(R.id.btnzp);
-        imageButton.setOnClickListener(v -> {
-            new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                NavController navController = Navigation.findNavController(requireActivity(),
-                        R.id.nav_host_fragment_activity_main);
-                navController.navigate(R.id.navigation_zonepet);
-            }, 1000);
-        });
-
-        // Configurar el botón de logout
-        Button btnLogout = view.findViewById(R.id.btnLogout);
-        btnLogout.setOnClickListener(v -> {
-            if (getActivity() instanceof MainActivity) {
-                ((MainActivity) getActivity()).logout();
-            }
-        });
-
-        // Configurar el botón de editar perfil
-        Button btnEdit = view.findViewById(R.id.btnEdit);
-        btnEdit.setOnClickListener(v -> {
-            // Implementar la lógica para editar perfil
-            // Por ejemplo, navegar a un fragmento de edición:
-            // NavController navController = Navigation.findNavController(requireActivity(),
-            //     R.id.nav_host_fragment_activity_main);
-            // navController.navigate(R.id.navigation_edit_profile);
-        });
-
-        return view;
-    }
 }

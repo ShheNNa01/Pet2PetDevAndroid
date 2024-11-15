@@ -116,38 +116,37 @@
 
     <!-- Espacio para la biografía del usuario -->
 
-    //Boton editar perfil.
-
-    <EditText
-        android:id="@+id/etBiography"
+    <TextView
+        android:id="@+id/tvBiography"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        android:backgroundTint="#509ca2"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:hint="Descripción del usuario"
+        android:maxLines="4"
+        android:textColor="@color/black"
+        android:textSize="14sp"
         android:fontFamily="@font/baloo_tamma_regular"
-        android:hint="Descripción corta"
-        android:inputType="textMultiLine"
-        android:maxLines="3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@id/tvFollowersLabel"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvFollowersLabel" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/btnEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="32dp"
         android:backgroundTint="#509ca2"
         android:fontFamily="@font/baloo_tamma_regular"
         android:text="Editar perfil"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvFollowersLabel" />
+        app:layout_constraintTop_toBottomOf="@id/tvBiography" />
 
     <View
         android:id="@+id/divider"
