@@ -53,6 +53,10 @@ public class ApiClient {
         return apiService;
     }
 
+    public ApiService getApiService() {
+        return apiService;
+    }
+
     // Método para limpiar la instancia (útil para logout)
     public static void clearInstance() {
         instance = null;

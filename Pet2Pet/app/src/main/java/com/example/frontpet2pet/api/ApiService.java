@@ -7,7 +7,9 @@ import com.example.frontpet2pet.data.models.response.PetResponse;
 import com.example.frontpet2pet.data.models.response.UserResponse;
 
 import java.util.List;
+import java.util.Map;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -25,4 +27,7 @@ public interface ApiService {
 
     @POST("auth/register")
     Call<UserResponse> register(@Body RegisterRequest request);
+
+    @POST("password-reset-request")
+    Call<ResponseBody> requestPasswordReset(@Body Map<String, String> requestBody);
 }
