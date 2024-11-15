@@ -45,13 +45,19 @@ dependencies {
     implementation(libs.navigation.ui)
     implementation(libs.activity)
 
+    // CircleImageView para fotos de perfil circulares
+    implementation("de.hdodenhof:circleimageview:3.1.0")
+
+    // Material Design (corregido)
+    implementation("com.google.android.material:material:1.11.0")  // Versión corregida
+
     // Retrofit y Networking
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
     implementation("com.google.code.gson:gson:2.10.1")
 
-    // Glide para manejo de imágenes (ya lo tienes, es perfecto para este diseño)
+    // Glide para manejo de imágenes
     implementation("com.github.bumptech.glide:glide:4.16.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
 

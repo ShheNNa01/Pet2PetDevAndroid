@@ -110,7 +110,7 @@ public class InicioSesion extends AppCompatActivity {
 
         ForgotPass.setOnClickListener(v -> {
             v.startAnimation(AnimationUtils.loadAnimation(this, R.anim.click_alpha_animation));
-            Intent intent = new Intent(InicioSesion.this, ForgotPas.class);  // Aquí se abre la actividad ForgotPas
+            Intent intent = new Intent(InicioSesion.this, ForgotPas.class);
             startActivity(intent);
         });
 

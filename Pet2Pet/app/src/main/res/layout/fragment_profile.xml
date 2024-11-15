@@ -9,6 +9,9 @@
     tools:ignore="ExtraText">
 
     //Gestion de perfiles para mascotas
+
+    //Nombre de usuario con sesión activa.
+
     <ImageButton
         android:id="@+id/btnzp"
         android:layout_width="138dp"
@@ -21,36 +24,38 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.058"
+        app:layout_constraintVertical_bias="0.011"
         app:srcCompat="@drawable/zonapet" />
 
-    //Nombre de usuario con sesión activa.
+    //Número de seguidores.
+
+    //Número de cuentas siguiendo.
+
     <TextView
         android:id="@+id/tvUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/baloo_tamma_regular"
         android:text="'@usuario_logeado'"
         android:textColor="#000000"
-        app:layout_constraintTop_toBottomOf="@id/btnzp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/btnzp" />
 
-    //Número de seguidores.
     <TextView
         android:id="@+id/tvFollowersCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="4dp"
         android:fontFamily="@font/baloo_tamma_regular"
         android:text="389"
-        app:layout_constraintTop_toBottomOf="@id/tvUsername"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/tvFollowingCount"
-        app:layout_constraintHorizontal_chainStyle="spread" />
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvUsername" />
 
-    //Número de cuentas siguiendo.
     <TextView
         android:id="@+id/tvFollowingCount"
         android:layout_width="wrap_content"
@@ -109,34 +114,40 @@
         app:layout_constraintStart_toStartOf="@id/tvLikesCount"
         app:layout_constraintEnd_toEndOf="@id/tvLikesCount" />
 
-    //Boton editar perfil.
+    <!-- Espacio para la biografía del usuario -->
+
+    <TextView
+        android:id="@+id/tvBiography"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:hint="Descripción del usuario"
+        android:maxLines="4"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:fontFamily="@font/baloo_tamma_regular"
+        app:layout_constraintTop_toBottomOf="@id/tvFollowersLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <Button
         android:id="@+id/btnEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="32dp"
         android:backgroundTint="#509ca2"
         android:fontFamily="@font/baloo_tamma_regular"
         android:text="Editar perfil"
-        app:layout_constraintTop_toBottomOf="@id/tvFollowersLabel"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btnLogout"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        android:layout_marginStart="32dp" />
-
-    //Boton cerrar sesión.
-    <Button
-        android:id="@+id/btnLogout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/baloo_tamma_regular"
-        android:text="Cerrar sesión"
-        app:layout_constraintTop_toTopOf="@id/btnEdit"
-        app:layout_constraintStart_toEndOf="@id/btnEdit"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="32dp" />
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvBiography" />
 
-    //Espacio para visualización de post publicados por el usuario
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
@@ -145,6 +156,7 @@
         android:background="#CCCCCC"
         app:layout_constraintTop_toBottomOf="@id/btnEdit" />
 
+    //Espacio para visualización de post publicados por el usuario
     <!-- RecyclerView para los posts -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvUserPosts"
