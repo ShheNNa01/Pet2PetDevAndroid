@@ -28,6 +28,6 @@ public interface ApiService {
     @POST("auth/register")
     Call<UserResponse> register(@Body RegisterRequest request);
 
-    @POST("password-reset-request")
+    @POST("auth/password-reset-request")
     Call<ResponseBody> requestPasswordReset(@Body Map<String, String> requestBody);
 }
