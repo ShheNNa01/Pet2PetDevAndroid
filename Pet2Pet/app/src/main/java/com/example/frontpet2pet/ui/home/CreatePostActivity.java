@@ -21,10 +21,25 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.frontpet2pet.R;
+import com.example.frontpet2pet.api.ApiService;
+import com.example.frontpet2pet.api.RetrofitClient;
 import com.example.frontpet2pet.data.local.SharedPrefsManager;
+import com.example.frontpet2pet.data.models.response.PostResponse;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CreatePostActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -35,28 +50,39 @@ public class CreatePostActivity extends AppCompatActivity {
     private Button postButton;
     private Uri selectedImageUri;
     private ProgressDialog progressDialog;
+    private ApiService apiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_post);
 
+        // Inicializar ApiService
+        apiService = RetrofitClient.getInstance().create(ApiService.class);
+
         // Inicializar vistas
-        imagePreview = findViewById(R.id.imagePreview);
-        descriptionInput = findViewById(R.id.descriptionInput);
-        postButton = findViewById(R.id.postButton);
+        initializeViews();
 
         // Verificar permisos al inicio
         checkPermissions();
 
-        // Configurar selector de imagen
+        // Configurar listeners
+        setupListeners();
+    }
+
+    private void initializeViews() {
+        imagePreview = findViewById(R.id.imagePreview);
+        descriptionInput = findViewById(R.id.descriptionInput);
+        postButton = findViewById(R.id.postButton);
+    }
+
+    private void setupListeners() {
         imagePreview.setOnClickListener(v -> {
             if (checkUserSession()) {
                 selectImage();
             }
         });
 
-        // Configurar botón de publicar
         postButton.setOnClickListener(v -> {
             if (validateInput(selectedImageUri, descriptionInput.getText().toString())) {
                 checkNetworkConnection();
@@ -87,26 +113,102 @@ public class CreatePostActivity extends AppCompatActivity {
     }
 
     private void uploadImageAndCreatePost(Uri imageUri, String description) {
-        if (imageUri == null) {
-            Toast.makeText(this, "Por favor selecciona una imagen", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        if (!validateInput(imageUri, description)) return;
 
+        showProgressDialog();
         updatePostStatus("UPLOADING");
 
         try {
-            // Comprimir imagen antes de subir
-            compressImage(imageUri);
+            // Convertir imagen a archivo
+            File imageFile = createImageFile(imageUri);
 
-            // Aquí iría tu lógica de subida de imagen y creación de post
-            // Por ejemplo, usando Firebase Storage y Firestore
+            // Crear partes del multipart request
+            MultipartBody.Part imagePart = createImagePart(imageFile);
+            RequestBody descriptionBody = createRequestBody(description);
+            RequestBody userIdBody = createRequestBody(SharedPrefsManager.getInstance().getUserId());
+            RequestBody petIdBody = createRequestBody(SharedPrefsManager.getInstance().getPetId());
 
-            // Simulación de éxito (reemplazar con tu lógica real)
-            updatePostStatus("SUCCESS");
-        } catch (Exception e) {
-            updatePostStatus("ERROR");
-            e.printStackTrace();
+            // Hacer la llamada a la API
+            Call<PostResponse> call = apiService.createPost(
+                    imagePart,
+                    descriptionBody,
+                    userIdBody,
+                    petIdBody
+            );
+
+            call.enqueue(new Callback<PostResponse>() {
+                @Override
+                public void onResponse(Call<PostResponse> call, Response<PostResponse> response) {
+                    handleApiResponse(response);
+                }
+
+                @Override
+                public void onFailure(Call<PostResponse> call, Throwable t) {
+                    handleApiError(t);
+                }
+            });
+
+        } catch (IOException e) {
+            handleException(e);
         }
+    }
+
+    private MultipartBody.Part createImagePart(File file) {
+        RequestBody requestFile = RequestBody.create(
+                MediaType.parse("image/*"),
+                file
+        );
+        return MultipartBody.Part.createFormData("image", file.getName(), requestFile);
+    }
+
+    private RequestBody createRequestBody(String value) {
+        return RequestBody.create(MediaType.parse("text/plain"), value != null ? value : "");
+    }
+
+    private void handleApiResponse(Response<PostResponse> response) {
+        if (response.isSuccessful() && response.body() != null) {
+            updatePostStatus("SUCCESS");
+        } else {
+            String errorMessage = "Error al crear el post";
+            try {
+                if (response.errorBody() != null) {
+                    errorMessage = response.errorBody().string();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            updatePostStatus("ERROR");
+            Toast.makeText(CreatePostActivity.this, errorMessage, Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void handleApiError(Throwable t) {
+        updatePostStatus("ERROR");
+        Toast.makeText(CreatePostActivity.this,
+                "Error de conexión: " + t.getMessage(),
+                Toast.LENGTH_LONG).show();
+    }
+
+    private void handleException(Exception e) {
+        updatePostStatus("ERROR");
+        e.printStackTrace();
+        Toast.makeText(this, "Error al procesar la imagen", Toast.LENGTH_SHORT).show();
+    }
+
+    private File createImageFile(Uri imageUri) throws IOException {
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getCacheDir();
+        File imageFile = File.createTempFile(imageFileName, ".jpg", storageDir);
+
+        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, baos);
+        FileOutputStream fos = new FileOutputStream(imageFile);
+        fos.write(baos.toByteArray());
+        fos.close();
+
+        return imageFile;
     }
 
     private void showProgressDialog() {
@@ -130,18 +232,6 @@ public class CreatePostActivity extends AppCompatActivity {
         }
 
         return true;
-    }
-
-    private void compressImage(Uri imageUri) {
-        try {
-            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 70, baos);
-            // Aquí se podra usar el baos para subir la imagen
-        } catch (IOException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "Error al procesar la imagen", Toast.LENGTH_SHORT).show();
-        }
     }
 
     private void checkNetworkConnection() {
@@ -190,7 +280,6 @@ public class CreatePostActivity extends AppCompatActivity {
         if (!SharedPrefsManager.getInstance().isLoggedIn()) {
             Toast.makeText(this, "Sesión expirada, por favor inicia sesión nuevamente",
                     Toast.LENGTH_LONG).show();
-            // Aquí se podría redirigir al login
             return false;
         }
         return true;
