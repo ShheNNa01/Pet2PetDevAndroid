@@ -50,12 +50,12 @@
         android:id="@+id/imgcat"
         android:layout_width="234dp"
         android:layout_height="130dp"
+        android:layout_marginEnd="16dp"
         android:src="@drawable/cat"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout7"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.275"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="161dp" />
+        app:layout_constraintVertical_bias="0.333" />
 
     <LinearLayout
         android:id="@+id/lyname"
@@ -112,17 +112,13 @@
             android:text="Raza"
             android:textSize="20dp" />
 
-        <EditText
-            android:id="@+id/edtBreed"
+        <Spinner
+            android:id="@+id/spinnerBreed"
             android:layout_width="360dp"
             android:layout_height="45dp"
             android:layout_marginLeft="20dp"
-            android:ems="10"
-            android:fontFamily="@font/baloo_tamma_regular"
-            android:hint="Indicanos la raza,tipo,especie etc..."
-            android:inputType="text"
-            android:textColor="#757575"
-            android:textColorHint="#BDBDBD" />
+            android:spinnerMode="dropdown" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -175,52 +171,50 @@
             android:layout_height="25dp"
             android:layout_marginLeft="20dp"
             android:fontFamily="@font/baloo_tamma_regular"
-            android:text="Genero"
+            android:text="Género"
             android:textSize="20dp" />
 
-        <EditText
-            android:id="@+id/edtGender"
+        <Spinner
+            android:id="@+id/spinnerGender"
             android:layout_width="360dp"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:layout_marginLeft="20dp"
-            android:ems="10"
+            android:spinnerMode="dropdown"
             android:fontFamily="@font/baloo_tamma_regular"
-            android:hint="Indicanos que genero es tu mascota"
-            android:inputType="textPassword"
-            android:textColor="#757575"
-            android:textColorHint="#BDBDBD" />
+            android:inputType="text"
+            android:entries="@array/gender_array" />
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/lyConFpass"
-        android:layout_width="409dp"
-        android:layout_height="75dp"
-        android:layout_marginBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="108dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/buttonCrear"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lyEmail">
+        app:layout_constraintTop_toBottomOf="@+id/lyLastName"
+        tools:layout_editor_absoluteX="-1dp">
 
         <TextView
             android:id="@+id/tvBiography"
             android:layout_width="match_parent"
-            android:layout_height="25dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:fontFamily="@font/baloo_tamma_regular"
-            android:text="Biografia"
+            android:text="Biografía"
             android:textSize="20dp" />
 
         <EditText
-            android:id="@+id/edtpassConfirm"
+            android:id="@+id/edtBiog"
             android:layout_width="360dp"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:layout_marginLeft="20dp"
-            android:ems="10"
             android:fontFamily="@font/baloo_tamma_regular"
-            android:hint="Cuentanos un poco de tu mascota"
-            android:inputType="textPassword"
+            android:hint="Cuentanos un poco de tu mascota (máx. 1000 caracteres)"
+            android:inputType="textMultiLine"
+            android:maxLength="1000"
+            android:maxLines="6"
+            android:scrollbars="vertical"
             android:textColor="#757575"
             android:textColorHint="#BDBDBD" />
     </LinearLayout>
@@ -240,8 +234,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lyConFpass" />
+        app:layout_constraintTop_toBottomOf="@+id/lyConFpass"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

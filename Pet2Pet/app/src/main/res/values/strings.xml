@@ -15,4 +15,11 @@
     <string name="error_password_corto">La contraseña debe tener al menos 8 caracteres.</string>
     <string name="error_conexion">Error de conexión. Por favor, verifica tu conexión a internet.</string>
     <string name="appbar_scrolling_view_behavior">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
+
+    <string-array name="gender_array">
+        <item>Masculino</item>
+        <item>Femenino</item>
+    </string-array>
+
+
 </resources>

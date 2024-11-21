@@ -1,10 +1,11 @@
 package com.example.frontpet2pet.api;
 
-import com.example.frontpet2pet.data.models.request.LoginRequest;
+import com.example.frontpet2pet.data.models.request.Breeds;
 import com.example.frontpet2pet.data.models.request.RegisterRequest;
 import com.example.frontpet2pet.data.models.response.AuthResponse;
 import com.example.frontpet2pet.data.models.response.PetResponse;
 import com.example.frontpet2pet.data.models.response.UserResponse;
+import com.example.frontpet2pet.data.models.request.RegisterPetRequest;
 
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface ApiService {
     @FormUrlEncoded
@@ -30,4 +32,11 @@ public interface ApiService {
 
     @POST("auth/password-reset-request")
     Call<ResponseBody> requestPasswordReset(@Body Map<String, String> requestBody);
+
+    @POST("pets")
+    Call<PetResponse> createPet(@Body RegisterPetRequest petRequest);
+
+    @GET("pets/breeds")
+    Call<List<Breeds>> getPetBreeds(@Query("skip") int skip, @Query("limit") int limit);
+
 }

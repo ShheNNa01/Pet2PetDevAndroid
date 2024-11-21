@@ -31,113 +31,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/profileImage" />
 
+    <TextView
+        android:id="@+id/petInitialText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/baloo_tamma_regular"
+        android:textSize="20sp"
+        android:textColor="#509CA2" />
+
+
     <!-- Pet Grid -->
 
     <!-- Botón de Cerrar Sesión -->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/petGrid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="124dp"
+        android:layout_width="130dp"
+        android:layout_height="119dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="114dp"
+        android:layout_marginEnd="141dp"
+        android:layout_marginBottom="228dp"
+        android:foregroundGravity="center"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/btnLogout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/userName">
-
-        <!-- First Row -->
-        <ImageButton
-            android:id="@+id/pet1"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_margin="8dp"
-            android:background="@drawable/circle_border_coral"
-            android:contentDescription="Mascota Aslan"
-            android:padding="3dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/pet2"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_margin="8dp"
-            android:background="@drawable/circle_border_blue"
-            android:contentDescription="Mascota Sky"
-            android:padding="3dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintStart_toEndOf="@id/pet1"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/pet3"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_margin="8dp"
-            android:background="@drawable/circle_border_coral"
-            android:contentDescription="Mascota Noche"
-            android:padding="3dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintStart_toEndOf="@id/pet2"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <!-- Pet Names -->
-        <TextView
-            android:id="@+id/Name1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Aslan"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="@id/pet1"
-            app:layout_constraintStart_toStartOf="@id/pet1"
-            app:layout_constraintTop_toBottomOf="@id/pet1" />
-
-        <TextView
-            android:id="@+id/Name2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sky"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="@id/pet2"
-            app:layout_constraintStart_toStartOf="@id/pet2"
-            app:layout_constraintTop_toBottomOf="@id/pet2" />
-
-        <TextView
-            android:id="@+id/Name3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Noche"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="@id/pet3"
-            app:layout_constraintStart_toStartOf="@id/pet3"
-            app:layout_constraintTop_toBottomOf="@id/pet3" />
-
-        <!-- Segunda Filas de mascotas creadas :), Se hace mas facil trabajarlo de esta manera pal que sea que se pregunte por que xD -->
-        <ImageButton
-            android:id="@+id/pet4"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_margin="8dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/circle_border_black"
-            android:contentDescription="Mascota Avril"
-            android:padding="3dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.163"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/Name1" />
-
-        <TextView
-            android:id="@+id/Name4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Avril"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="@id/pet4"
-            app:layout_constraintStart_toStartOf="@id/pet4"
-            app:layout_constraintTop_toBottomOf="@id/pet4" />
+        app:layout_constraintTop_toBottomOf="@+id/userName">
 
         <ImageButton
             android:id="@+id/add"
@@ -146,13 +68,15 @@
             android:layout_margin="8dp"
             android:background="@drawable/circle_border_blue"
             android:contentDescription="Agregar mascota"
+            android:foregroundGravity="center"
             android:padding="20dp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_add"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/addPetText"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.815"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/Name1" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/addPetText"
@@ -160,6 +84,7 @@
             android:layout_height="wrap_content"
             android:text="Agregar Mascota"
             android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/add"
             app:layout_constraintStart_toStartOf="@+id/add"
             app:layout_constraintTop_toBottomOf="@+id/add" />
@@ -170,11 +95,12 @@
         android:id="@+id/btnLogout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="228dp"
+        android:layout_marginBottom="42dp"
         android:fontFamily="@font/baloo_tamma_regular"
         android:text="Cerrar sesión"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/petGrid" />
+        app:layout_constraintTop_toBottomOf="@+id/petGrid" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

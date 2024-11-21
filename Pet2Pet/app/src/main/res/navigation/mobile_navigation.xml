@@ -54,7 +54,18 @@
         android:id="@+id/navigation_zonepet"
         android:name="com.example.frontpet2pet.ui.profile.ZonaPetFragment"
         android:label="zonepet"
-        tools:layout="@layout/fragment_zonepet" />
+        tools:layout="@layout/fragment_zonepet">
+
+        <action
+            android:id="@+id/action_zonePetFragment_to_registerPetFragment"
+            app:destination="@id/registerPetFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerPetFragment"
+        android:name="com.example.frontpet2pet.ui.auth.register.RegisterPet"
+        android:label="Registro de Mascota"
+        tools:layout="@layout/fragment_register_pet" />
 
     <fragment
         android:id="@+id/editProfileFragment"
