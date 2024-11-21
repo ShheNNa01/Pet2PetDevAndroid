@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.frontpet2pet.data.local.SharedPrefsManager;
+import com.example.frontpet2pet.ui.home.CreatePostActivity;
 import com.example.frontpet2pet.ui.inicio.InicioSesion;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -16,6 +17,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.frontpet2pet.databinding.ActivityMainBinding;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,6 +45,15 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+        //Conexión del FabCreatePost (button) con la actividad del CreatePostActivity.
+
+        FloatingActionButton fabCreatePost = findViewById(R.id.fabCreatePost);
+        fabCreatePost.setOnClickListener(v -> {
+            Intent intent = new Intent(this, CreatePostActivity.class);
+            startActivity(intent);
+        });
+
 
         // Manejar el Intent que indica qué fragmento mostrar
         Intent intent = getIntent();
