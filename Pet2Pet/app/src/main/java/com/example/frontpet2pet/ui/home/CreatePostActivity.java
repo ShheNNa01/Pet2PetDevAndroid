@@ -44,6 +44,8 @@ import retrofit2.Response;
 public class CreatePostActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
     private static final int PERMISSION_REQUEST_CODE = 2;
+    private static final int MAX_IMAGE_SIZE = 1024 * 1024; // 1MB
+    private static final int COMPRESSION_QUALITY = 70;
 
     private ImageView imagePreview;
     private EditText descriptionInput;
@@ -57,16 +59,18 @@ public class CreatePostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_post);
 
+        // Verificar sesión antes de inicializar
+        if (!SharedPrefsManager.getInstance().hasValidUser()) {
+            Toast.makeText(this, "Sesión no válida", Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
+
         // Inicializar ApiService
         apiService = RetrofitClient.getInstance().create(ApiService.class);
 
-        // Inicializar vistas
         initializeViews();
-
-        // Verificar permisos al inicio
         checkPermissions();
-
-        // Configurar listeners
         setupListeners();
     }
 
@@ -78,17 +82,40 @@ public class CreatePostActivity extends AppCompatActivity {
 
     private void setupListeners() {
         imagePreview.setOnClickListener(v -> {
-            if (checkUserSession()) {
+            if (checkUserSessionAndNetwork()) {
                 selectImage();
             }
         });
 
         postButton.setOnClickListener(v -> {
-            if (validateInput(selectedImageUri, descriptionInput.getText().toString())) {
-                checkNetworkConnection();
+            if (checkUserSessionAndNetwork() && validateInput(selectedImageUri, descriptionInput.getText().toString())) {
                 createPost();
             }
         });
+    }
+
+    private boolean checkUserSessionAndNetwork() {
+        if (!SharedPrefsManager.getInstance().hasValidUser()) {
+            Toast.makeText(this, "Sesión expirada, por favor inicia sesión nuevamente",
+                    Toast.LENGTH_LONG).show();
+            finish();
+            return false;
+        }
+
+        if (!isNetworkAvailable()) {
+            Toast.makeText(this, "Por favor verifica tu conexión a internet",
+                    Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     private void selectImage() {
@@ -108,27 +135,35 @@ public class CreatePostActivity extends AppCompatActivity {
     }
 
     private void createPost() {
-        String description = descriptionInput.getText().toString();
-        uploadImageAndCreatePost(selectedImageUri, description);
+        if (!validateInput(selectedImageUri, descriptionInput.getText().toString())) {
+            return;
+        }
+        uploadImageAndCreatePost(selectedImageUri, descriptionInput.getText().toString().trim());
     }
 
     private void uploadImageAndCreatePost(Uri imageUri, String description) {
-        if (!validateInput(imageUri, description)) return;
-
         showProgressDialog();
         updatePostStatus("UPLOADING");
 
         try {
-            // Convertir imagen a archivo
             File imageFile = createImageFile(imageUri);
 
-            // Crear partes del multipart request
+            // Verificar tamaño de imagen
+            if (imageFile.length() > MAX_IMAGE_SIZE) {
+                updatePostStatus("ERROR");
+                Toast.makeText(this, "La imagen es demasiado grande", Toast.LENGTH_LONG).show();
+                return;
+            }
+
             MultipartBody.Part imagePart = createImagePart(imageFile);
             RequestBody descriptionBody = createRequestBody(description);
-            RequestBody userIdBody = createRequestBody(SharedPrefsManager.getInstance().getUserId());
-            RequestBody petIdBody = createRequestBody(SharedPrefsManager.getInstance().getPetId());
 
-            // Hacer la llamada a la API
+            // Usar los nuevos métodos de SharedPrefsManager
+            String userId = SharedPrefsManager.getInstance().getPostUserId();
+            RequestBody userIdBody = createRequestBody(userId);
+            // Usar userId también como petId por ahora
+            RequestBody petIdBody = createRequestBody(userId);
+
             Call<PostResponse> call = apiService.createPost(
                     imagePart,
                     descriptionBody,
@@ -162,7 +197,10 @@ public class CreatePostActivity extends AppCompatActivity {
     }
 
     private RequestBody createRequestBody(String value) {
-        return RequestBody.create(MediaType.parse("text/plain"), value != null ? value : "");
+        return RequestBody.create(
+                MediaType.parse("text/plain"),
+                value != null ? value : ""
+        );
     }
 
     private void handleApiResponse(Response<PostResponse> response) {
@@ -178,21 +216,8 @@ public class CreatePostActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             updatePostStatus("ERROR");
-            Toast.makeText(CreatePostActivity.this, errorMessage, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
         }
-    }
-
-    private void handleApiError(Throwable t) {
-        updatePostStatus("ERROR");
-        Toast.makeText(CreatePostActivity.this,
-                "Error de conexión: " + t.getMessage(),
-                Toast.LENGTH_LONG).show();
-    }
-
-    private void handleException(Exception e) {
-        updatePostStatus("ERROR");
-        e.printStackTrace();
-        Toast.makeText(this, "Error al procesar la imagen", Toast.LENGTH_SHORT).show();
     }
 
     private File createImageFile(Uri imageUri) throws IOException {
@@ -203,12 +228,26 @@ public class CreatePostActivity extends AppCompatActivity {
 
         Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, baos);
-        FileOutputStream fos = new FileOutputStream(imageFile);
-        fos.write(baos.toByteArray());
-        fos.close();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, COMPRESSION_QUALITY, baos);
+
+        try (FileOutputStream fos = new FileOutputStream(imageFile)) {
+            fos.write(baos.toByteArray());
+        }
 
         return imageFile;
+    }
+
+    private void handleApiError(Throwable t) {
+        updatePostStatus("ERROR");
+        String errorMessage = "Error de conexión: " +
+                (t.getMessage() != null ? t.getMessage() : "Error desconocido");
+        Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
+    }
+
+    private void handleException(Exception e) {
+        updatePostStatus("ERROR");
+        e.printStackTrace();
+        Toast.makeText(this, "Error al procesar la imagen", Toast.LENGTH_SHORT).show();
     }
 
     private void showProgressDialog() {
@@ -226,23 +265,17 @@ public class CreatePostActivity extends AppCompatActivity {
             return false;
         }
 
-        if (description.trim().isEmpty()) {
+        if (description == null || description.trim().isEmpty()) {
             Toast.makeText(this, "Por favor añade una descripción", Toast.LENGTH_SHORT).show();
             return false;
         }
 
-        return true;
-    }
-
-    private void checkNetworkConnection() {
-        ConnectivityManager connectivityManager = (ConnectivityManager)
-                getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-
-        if (activeNetworkInfo == null || !activeNetworkInfo.isConnected()) {
-            Toast.makeText(this, "Por favor verifica tu conexión a internet",
-                    Toast.LENGTH_LONG).show();
+        if (description.trim().length() > 500) { // Límite de caracteres
+            Toast.makeText(this, "La descripción es demasiado larga", Toast.LENGTH_SHORT).show();
+            return false;
         }
+
+        return true;
     }
 
     private void checkPermissions() {
@@ -270,19 +303,8 @@ public class CreatePostActivity extends AppCompatActivity {
                 break;
             case "ERROR":
                 if (progressDialog != null) progressDialog.dismiss();
-                Toast.makeText(this, "Error al crear la publicación",
-                        Toast.LENGTH_LONG).show();
                 break;
         }
-    }
-
-    private boolean checkUserSession() {
-        if (!SharedPrefsManager.getInstance().isLoggedIn()) {
-            Toast.makeText(this, "Sesión expirada, por favor inicia sesión nuevamente",
-                    Toast.LENGTH_LONG).show();
-            return false;
-        }
-        return true;
     }
 
     @Override

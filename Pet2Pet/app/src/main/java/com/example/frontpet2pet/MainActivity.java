@@ -2,13 +2,14 @@ package com.example.frontpet2pet;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.ImageView;
+import android.view.View;
+import android.widget.Toast;
 
 import com.example.frontpet2pet.data.local.SharedPrefsManager;
 import com.example.frontpet2pet.ui.home.CreatePostActivity;
 import com.example.frontpet2pet.ui.inicio.InicioSesion;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -17,11 +18,12 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.frontpet2pet.databinding.ActivityMainBinding;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    private NavController navController;
+    private static final int CREATE_POST_REQUEST = 100; // Añadido para manejar el resultado
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,25 +39,46 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        //Configuración de la navegación
+        setupNavigation();
+        setupFabCreatePost();
+        handleIncomingIntent();
+    }
+
+    private void setupNavigation() {
         BottomNavigationView navView = binding.navView;
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+    }
 
-        //Conexión del FabCreatePost (button) con la actividad del CreatePostActivity.
+    private void setupFabCreatePost() {
+        FloatingActionButton fabCreatePost = binding.fabCreatePost;
+        if (fabCreatePost != null) {
+            fabCreatePost.setOnClickListener(v -> {
+                if (SharedPrefsManager.getInstance().isLoggedIn()) {
+                    launchCreatePost();
+                } else {
+                    Toast.makeText(this, "Debes iniciar sesión primero", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(this, InicioSesion.class));
+                }
+            });
+        }
+    }
 
-        FloatingActionButton fabCreatePost = findViewById(R.id.fabCreatePost);
-        fabCreatePost.setOnClickListener(v -> {
+    private void launchCreatePost() {
+        try {
             Intent intent = new Intent(this, CreatePostActivity.class);
-            startActivity(intent);
-        });
+            startActivityForResult(intent, CREATE_POST_REQUEST);
+        } catch (Exception e) {
+            Toast.makeText(this, "Error al abrir la creación de post", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+    }
 
-
-        // Manejar el Intent que indica qué fragmento mostrar
+    private void handleIncomingIntent() {
         Intent intent = getIntent();
         if (intent != null && intent.getStringExtra("showFragment") != null) {
             String fragmentToShow = intent.getStringExtra("showFragment");
@@ -63,34 +86,48 @@ public class MainActivity extends AppCompatActivity {
                 navController.navigate(R.id.navigation_iniciar);
             }
         }
-
-        // Configuración del botón del logo para navegar al fragmento de inicio de sesión (LO COMENTO MIENTRAS DEFINIMOS EL PROCESO DEL LOGRO)
-        //ImageView centerLogoButton = findViewById(R.id.center_logo_button);
-        //centerLogoButton.setOnClickListener(v -> {
-        // Navegar al fragmento de inicio de sesión
-        //navController.navigate(R.id.navigation_iniciar); // Cambia este ID al correcto
-        //});
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CREATE_POST_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                // Recargar el feed o mostrar mensaje de éxito
+                Toast.makeText(this, "Post creado exitosamente", Toast.LENGTH_SHORT).show();
+                // Opcional: refrescar el fragment de home
+                if (navController.getCurrentDestination().getId() == R.id.navigation_home) {
+                    navController.navigate(R.id.navigation_home);
+                }
+            }
+        }
+    }
+
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         return navController.navigateUp() || super.onSupportNavigateUp();
     }
 
-    //Metodo para cerrar sesion
     public void logout() {
-        SharedPrefsManager.getInstance().clearSession();
-        Intent intent = new Intent(this, InicioSesion.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        finish();
+        try {
+            SharedPrefsManager.getInstance().clearSession();
+            Intent intent = new Intent(this, InicioSesion.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        } catch (Exception e) {
+            Toast.makeText(this, "Error al cerrar sesión", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Verificar sesión cada vez que la actividad vuelve al frente
+        if (!SharedPrefsManager.getInstance().isLoggedIn()) {
+            startActivity(new Intent(this, InicioSesion.class));
+            finish();
+        }
     }
 }
-
-
-
-
-
-
-
-

@@ -29,12 +29,6 @@
         android:label="@string/title_events"
         tools:layout="@layout/fragment_events" />
 
-    <activity
-        android:id="@+id/navigation_iniciar"
-        android:name="com.example.frontpet2pet.ui.inicio.InicioSesion"
-        android:label="@string/title_inicia"
-        tools:layout="@layout/activity_inicio_sesion" />
-
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.example.frontpet2pet.ui.profile.ProfileFragment"
@@ -61,5 +55,17 @@
         android:name="com.example.frontpet2pet.ui.profile.EditProfileFragment"
         android:label="Editar Perfil"
         tools:layout="@layout/fragment_edit_profile" />
+
+    <activity
+        android:id="@+id/navigation_create_post"
+        android:name="com.example.frontpet2pet.ui.home.CreatePostActivity"
+        android:label="Crear Publicación"
+        tools:layout="@layout/activity_create_post" />
+
+    <activity
+        android:id="@+id/navigation_iniciar"
+        android:name="com.example.frontpet2pet.ui.inicio.InicioSesion"
+        android:label="@string/title_inicia"
+        tools:layout="@layout/activity_inicio_sesion" />
 
 </navigation>

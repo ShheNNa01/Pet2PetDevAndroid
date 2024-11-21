@@ -4,6 +4,7 @@ import com.example.frontpet2pet.data.models.request.LoginRequest;
 import com.example.frontpet2pet.data.models.request.RegisterRequest;
 import com.example.frontpet2pet.data.models.response.AuthResponse;
 import com.example.frontpet2pet.data.models.response.PetResponse;
+import com.example.frontpet2pet.data.models.response.PostResponse;
 import com.example.frontpet2pet.data.models.response.UserResponse;
 import com.example.frontpet2pet.ui.home.Post;
 
@@ -40,7 +41,7 @@ public interface ApiService {
     // Endpoints para posts
     @Multipart
     @POST("posts/create")
-    Call<Post> createPost(
+    Call<PostResponse> createPost(
             @Part MultipartBody.Part image,
             @Part("description") RequestBody description,
             @Part("userId") RequestBody userId,
