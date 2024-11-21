@@ -13,6 +13,7 @@ public class SharedPrefsManager {
     private static final String KEY_USER_NAME = "user_name";
     private static final String KEY_ROLE_ID = "role_id";
     private static final String KEY_IS_LOGGED_IN = "is_logged_in";
+    private static final String KEY_PET_ID = "pet_id";
 
     private static SharedPrefsManager instance;
     private final SharedPreferences prefs;
@@ -62,6 +63,12 @@ public class SharedPrefsManager {
         return prefs.getInt(KEY_USER_ID, -1);
     }
 
+    // Método para obtener userId como String para los posts
+    public String getUserIdAsString() {
+        int userId = getUserId();
+        return userId != -1 ? String.valueOf(userId) : "";
+    }
+
     public String getUserName() {
         return prefs.getString(KEY_USER_NAME, "");
     }
@@ -70,7 +77,28 @@ public class SharedPrefsManager {
         return prefs.contains(KEY_ROLE_ID) ? prefs.getInt(KEY_ROLE_ID, -1) : null;
     }
 
+    // Método para validar si hay un usuario válido antes de crear un post
+    public boolean hasValidUser() {
+        return getUserId() != -1 && isLoggedIn();
+    }
+
+    // Método auxiliar para la creación de posts
+    public String getPostUserId() {
+        if (!hasValidUser()) {
+            return "";
+        }
+        return getUserIdAsString();
+    }
+
     public void clearSession() {
         prefs.edit().clear().apply();
+    }
+
+    // Método de utilidad para debugging
+    public boolean isUserDataComplete() {
+        return prefs.contains(KEY_USER_ID) &&
+                prefs.contains(KEY_USER_NAME) &&
+                prefs.contains(KEY_TOKEN) &&
+                isLoggedIn();
     }
 }

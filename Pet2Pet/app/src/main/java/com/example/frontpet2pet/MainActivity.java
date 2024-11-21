@@ -2,12 +2,15 @@ package com.example.frontpet2pet;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.ImageView;
+import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import com.example.frontpet2pet.data.local.SharedPrefsManager;
+import com.example.frontpet2pet.ui.home.CreatePostActivity;
 import com.example.frontpet2pet.ui.inicio.InicioSesion;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -18,68 +21,182 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.frontpet2pet.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
+    private static final int CREATE_POST_REQUEST = 100;
 
     private ActivityMainBinding binding;
+    private NavController navController;
+    private boolean isProcessingClick = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Verificar sesión
-        if (!SharedPrefsManager.getInstance().isLoggedIn()) {
-            startActivity(new Intent(this, InicioSesion.class));
-            finish();
+        if (!checkAndHandleUserSession()) {
             return;
         }
 
+        initializeUI();
+    }
+
+    private boolean checkAndHandleUserSession() {
+        if (!SharedPrefsManager.getInstance().isLoggedIn()) {
+            redirectToLogin();
+            return false;
+        }
+        return true;
+    }
+
+    private void redirectToLogin() {
+        startActivity(new Intent(this, InicioSesion.class));
+        finish();
+    }
+
+    private void initializeUI() {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        //Configuración de la navegación
+        setupNavigation();
+        setupFabCreatePost();
+        handleIncomingIntent();
+    }
+
+    private void setupNavigation() {
         BottomNavigationView navView = binding.navView;
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+    }
 
-        // Manejar el Intent que indica qué fragmento mostrar
-        Intent intent = getIntent();
-        if (intent != null && intent.getStringExtra("showFragment") != null) {
-            String fragmentToShow = intent.getStringExtra("showFragment");
-            if (fragmentToShow.equals("inicio_sesion")) {
-                navController.navigate(R.id.navigation_iniciar);
+    private void setupFabCreatePost() {
+        try {
+            FloatingActionButton fabCreatePost = binding.fabCreatePost;
+            if (fabCreatePost != null) {
+                configureFabButton(fabCreatePost);
+            } else {
+                Log.e(TAG, "FAB is null");
             }
+        } catch (Exception e) {
+            Log.e(TAG, "Error in setupFabCreatePost: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void configureFabButton(FloatingActionButton fab) {
+        fab.setOnClickListener(null);
+        fab.setEnabled(true);
+        Log.d(TAG, "FAB configured");
+
+        fab.setOnClickListener(v -> handleFabClick(v));
+    }
+
+    private void handleFabClick(View v) {
+        if (isProcessingClick) {
+            return;
         }
 
-        // Configuración del botón del logo para navegar al fragmento de inicio de sesión (LO COMENTO MIENTRAS DEFINIMOS EL PROCESO DEL LOGRO)
-        //ImageView centerLogoButton = findViewById(R.id.center_logo_button);
-        //centerLogoButton.setOnClickListener(v -> {
-        // Navegar al fragmento de inicio de sesión
-        //navController.navigate(R.id.navigation_iniciar); // Cambia este ID al correcto
-        //});
+        isProcessingClick = true;
+        v.setEnabled(false);
+        Log.d(TAG, "FAB clicked");
+
+        try {
+            if (!isFinishing() && !isDestroyed()) {
+                if (SharedPrefsManager.getInstance().isLoggedIn()) {
+                    launchCreatePost();
+                } else {
+                    handleNotLoggedInUser();
+                }
+            }
+        } catch (Exception e) {
+            handleFabError(e);
+        } finally {
+            resetFabState(v);
+        }
     }
+
+    private void launchCreatePost() {
+        Log.d(TAG, "Launching CreatePostActivity");
+        Intent intent = new Intent(this, CreatePostActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivityForResult(intent, CREATE_POST_REQUEST);
+    }
+
+    private void handleNotLoggedInUser() {
+        Log.d(TAG, "User not logged in, redirecting to login");
+        Toast.makeText(this, "Debes iniciar sesión primero", Toast.LENGTH_SHORT).show();
+        redirectToLogin();
+    }
+
+    private void handleFabError(Exception e) {
+        Log.e(TAG, "Error handling FAB click: " + e.getMessage());
+        Toast.makeText(this, "Error al abrir la pantalla", Toast.LENGTH_SHORT).show();
+        e.printStackTrace();
+    }
+
+    private void resetFabState(View v) {
+        v.postDelayed(() -> {
+            v.setEnabled(true);
+            isProcessingClick = false;
+        }, 500);
+    }
+
+    private void handleIncomingIntent() {
+        Intent intent = getIntent();
+        if (intent != null && "inicio_sesion".equals(intent.getStringExtra("showFragment"))) {
+            navController.navigate(R.id.navigation_iniciar);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CREATE_POST_REQUEST && resultCode == RESULT_OK) {
+            handleSuccessfulPostCreation();
+        }
+    }
+
+    private void handleSuccessfulPostCreation() {
+        Toast.makeText(this, "Post creado exitosamente", Toast.LENGTH_SHORT).show();
+        refreshHomeFragment();
+    }
+
+    private void refreshHomeFragment() {
+        if (navController.getCurrentDestination().getId() == R.id.navigation_home) {
+            navController.navigate(R.id.navigation_home);
+        }
+    }
+
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         return navController.navigateUp() || super.onSupportNavigateUp();
     }
 
-    //Metodo para cerrar sesion
     public void logout() {
-        SharedPrefsManager.getInstance().clearSession();
-        Intent intent = new Intent(this, InicioSesion.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        finish();
+        try {
+            SharedPrefsManager.getInstance().clearSession();
+            redirectToLogin();
+        } catch (Exception e) {
+            Log.e(TAG, "Error during logout: " + e.getMessage());
+            Toast.makeText(this, "Error al cerrar sesión", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkAndHandleUserSession();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        isProcessingClick = false;
+        if (binding != null) {
+            binding = null;
+        }
     }
 }
-
-
-
-
-
-
-
-

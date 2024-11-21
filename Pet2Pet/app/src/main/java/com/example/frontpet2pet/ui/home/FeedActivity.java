@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +20,16 @@ public class FeedActivity extends AppCompatActivity {
     private PostAdapter postAdapter;
     private List<Post> postList;
     private FloatingActionButton fabCreatePost;
+
+    private static final int CREATE_POST_REQUEST = 1;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CREATE_POST_REQUEST && resultCode == RESULT_OK) {
+            loadPosts(); // Para recargar los posts
+        }
+    }
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -38,7 +49,7 @@ public class FeedActivity extends AppCompatActivity {
         // Configurar FAB para crear nuevo post
         fabCreatePost.setOnClickListener(v -> {
             Intent intent = new Intent(this, CreatePostActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent, CREATE_POST_REQUEST);
         });
 
         // Cargar posts

@@ -57,7 +57,8 @@
         <!-- Crear post -->
         <activity
             android:name=".ui.home.CreatePostActivity"
-            android:exported="false"/>
+            android:exported="false"
+            android:label="Crear Publicación" />
 
         <!-- Recuperar contraseña -->
         <activity
