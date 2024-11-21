@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Pet2Pet</string>
     <string name="title_home">Pagina Principal</string>
     <string name="title_dashboard">Tablero</string>
@@ -14,5 +14,5 @@
     <string name="error_email_invalido">Por favor, ingrese un email válido.</string>
     <string name="error_password_corto">La contraseña debe tener al menos 8 caracteres.</string>
     <string name="error_conexion">Error de conexión. Por favor, verifica tu conexión a internet.</string>
-
+    <string name="appbar_scrolling_view_behavior">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
 </resources>

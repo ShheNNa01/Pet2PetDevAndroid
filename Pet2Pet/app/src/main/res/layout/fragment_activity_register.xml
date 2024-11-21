@@ -47,8 +47,8 @@
 
             <TextView
                 android:id="@+id/tvlogin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
                 android:layout_weight="1"
                 android:background="@drawable/text_click_effect"
                 android:clickable="true"
@@ -58,8 +58,6 @@
                 android:textColor="#509CA2" />
         </LinearLayout>
     </LinearLayout>
-
-    -
 
     <!-- FECHA DE NACIMIENTO POR MEDIO DE CALENDARIO
     <LinearLayout
@@ -135,7 +133,7 @@
         <EditText
             android:id="@+id/edtName"
             android:layout_width="360dp"
-            android:layout_height="45dp"
+            android:layout_height="48dp"
             android:layout_marginLeft="20dp"
             android:ems="10"
             android:fontFamily="@font/baloo_tamma_regular"
@@ -172,7 +170,7 @@
         <EditText
             android:id="@+id/edtLastName"
             android:layout_width="360dp"
-            android:layout_height="45dp"
+            android:layout_height="48dp"
             android:layout_marginLeft="20dp"
             android:ems="10"
             android:fontFamily="@font/baloo_tamma_regular"

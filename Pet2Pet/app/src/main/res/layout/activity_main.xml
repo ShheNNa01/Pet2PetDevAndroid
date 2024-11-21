@@ -28,19 +28,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Botón del logo en el centro
-    <ImageView
-        android:id="@+id/center_logo_button"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:src="@drawable/button_logo"
-        android:scaleType="centerInside"
-        android:elevation="6dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="60dp" />-->
-
     <!-- Barra de navegación inferior -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
@@ -54,5 +41,17 @@
         app:itemIconTint="@android:color/white"
         app:itemTextColor="@android:color/black" />
 
+    <!-- Botón flotante para agregar post -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabCreatePost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_add"
+        android:contentDescription="Agregar nueva publicación"
+        app:layout_constraintBottom_toTopOf="@id/nav_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:fabSize="normal"
+        app:elevation="6dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

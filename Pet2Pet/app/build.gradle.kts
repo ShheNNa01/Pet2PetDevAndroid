@@ -49,7 +49,7 @@ dependencies {
     implementation("de.hdodenhof:circleimageview:3.1.0")
 
     // Material Design (corregido)
-    implementation("com.google.android.material:material:1.11.0")  // Versión corregida
+    implementation("com.google.android.material:material:1.11.0")
 
     // Retrofit y Networking
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
@@ -60,6 +60,12 @@ dependencies {
     // Glide para manejo de imágenes
     implementation("com.github.bumptech.glide:glide:4.16.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
+
+    // Compresión de imágenes
+    implementation ("id.zelory:compressor:3.0.1")
+
+    // SwipeRefreshLayout
+    implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
     // Testing
     testImplementation(libs.junit)

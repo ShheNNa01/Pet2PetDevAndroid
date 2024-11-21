@@ -42,7 +42,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:hint="Nombre (opcional)"
             android:fontFamily="@font/baloo_tamma_regular"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -55,7 +55,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tvBiography"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:hint="Descripción (opcional)"
             android:fontFamily="@font/baloo_tamma_regular"/>
     </com.google.android.material.textfield.TextInputLayout>
