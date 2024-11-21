@@ -58,8 +58,7 @@
         <activity
             android:name=".ui.home.CreatePostActivity"
             android:exported="false"
-            android:label="Crear Publicación"
-            android:windowSoftInputMode="adjustResize"/>
+            android:label="Crear Publicación" />
 
         <!-- Recuperar contraseña -->
         <activity

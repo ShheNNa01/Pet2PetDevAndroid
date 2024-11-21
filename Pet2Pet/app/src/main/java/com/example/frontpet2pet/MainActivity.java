@@ -2,6 +2,7 @@ package com.example.frontpet2pet;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -20,22 +21,38 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.frontpet2pet.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
+    private static final int CREATE_POST_REQUEST = 100;
 
     private ActivityMainBinding binding;
     private NavController navController;
-    private static final int CREATE_POST_REQUEST = 100; // Añadido para manejar el resultado
+    private boolean isProcessingClick = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Verificar sesión
-        if (!SharedPrefsManager.getInstance().isLoggedIn()) {
-            startActivity(new Intent(this, InicioSesion.class));
-            finish();
+        if (!checkAndHandleUserSession()) {
             return;
         }
 
+        initializeUI();
+    }
+
+    private boolean checkAndHandleUserSession() {
+        if (!SharedPrefsManager.getInstance().isLoggedIn()) {
+            redirectToLogin();
+            return false;
+        }
+        return true;
+    }
+
+    private void redirectToLogin() {
+        startActivity(new Intent(this, InicioSesion.class));
+        finish();
+    }
+
+    private void initializeUI() {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -55,51 +72,100 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupFabCreatePost() {
-        FloatingActionButton fabCreatePost = binding.fabCreatePost;
-        if (fabCreatePost != null) {
-            fabCreatePost.setOnClickListener(v -> {
-                if (SharedPrefsManager.getInstance().isLoggedIn()) {
-                    launchCreatePost();
-                } else {
-                    Toast.makeText(this, "Debes iniciar sesión primero", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(this, InicioSesion.class));
-                }
-            });
-        }
-    }
-
-    private void launchCreatePost() {
         try {
-            Intent intent = new Intent(this, CreatePostActivity.class);
-            startActivityForResult(intent, CREATE_POST_REQUEST);
+            FloatingActionButton fabCreatePost = binding.fabCreatePost;
+            if (fabCreatePost != null) {
+                configureFabButton(fabCreatePost);
+            } else {
+                Log.e(TAG, "FAB is null");
+            }
         } catch (Exception e) {
-            Toast.makeText(this, "Error al abrir la creación de post", Toast.LENGTH_SHORT).show();
+            Log.e(TAG, "Error in setupFabCreatePost: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
+    private void configureFabButton(FloatingActionButton fab) {
+        fab.setOnClickListener(null);
+        fab.setEnabled(true);
+        Log.d(TAG, "FAB configured");
+
+        fab.setOnClickListener(v -> handleFabClick(v));
+    }
+
+    private void handleFabClick(View v) {
+        if (isProcessingClick) {
+            return;
+        }
+
+        isProcessingClick = true;
+        v.setEnabled(false);
+        Log.d(TAG, "FAB clicked");
+
+        try {
+            if (!isFinishing() && !isDestroyed()) {
+                if (SharedPrefsManager.getInstance().isLoggedIn()) {
+                    launchCreatePost();
+                } else {
+                    handleNotLoggedInUser();
+                }
+            }
+        } catch (Exception e) {
+            handleFabError(e);
+        } finally {
+            resetFabState(v);
+        }
+    }
+
+    private void launchCreatePost() {
+        Log.d(TAG, "Launching CreatePostActivity");
+        Intent intent = new Intent(this, CreatePostActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivityForResult(intent, CREATE_POST_REQUEST);
+    }
+
+    private void handleNotLoggedInUser() {
+        Log.d(TAG, "User not logged in, redirecting to login");
+        Toast.makeText(this, "Debes iniciar sesión primero", Toast.LENGTH_SHORT).show();
+        redirectToLogin();
+    }
+
+    private void handleFabError(Exception e) {
+        Log.e(TAG, "Error handling FAB click: " + e.getMessage());
+        Toast.makeText(this, "Error al abrir la pantalla", Toast.LENGTH_SHORT).show();
+        e.printStackTrace();
+    }
+
+    private void resetFabState(View v) {
+        v.postDelayed(() -> {
+            v.setEnabled(true);
+            isProcessingClick = false;
+        }, 500);
+    }
+
     private void handleIncomingIntent() {
         Intent intent = getIntent();
-        if (intent != null && intent.getStringExtra("showFragment") != null) {
-            String fragmentToShow = intent.getStringExtra("showFragment");
-            if (fragmentToShow.equals("inicio_sesion")) {
-                navController.navigate(R.id.navigation_iniciar);
-            }
+        if (intent != null && "inicio_sesion".equals(intent.getStringExtra("showFragment"))) {
+            navController.navigate(R.id.navigation_iniciar);
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CREATE_POST_REQUEST) {
-            if (resultCode == RESULT_OK) {
-                // Recargar el feed o mostrar mensaje de éxito
-                Toast.makeText(this, "Post creado exitosamente", Toast.LENGTH_SHORT).show();
-                // Opcional: refrescar el fragment de home
-                if (navController.getCurrentDestination().getId() == R.id.navigation_home) {
-                    navController.navigate(R.id.navigation_home);
-                }
-            }
+        if (requestCode == CREATE_POST_REQUEST && resultCode == RESULT_OK) {
+            handleSuccessfulPostCreation();
+        }
+    }
+
+    private void handleSuccessfulPostCreation() {
+        Toast.makeText(this, "Post creado exitosamente", Toast.LENGTH_SHORT).show();
+        refreshHomeFragment();
+    }
+
+    private void refreshHomeFragment() {
+        if (navController.getCurrentDestination().getId() == R.id.navigation_home) {
+            navController.navigate(R.id.navigation_home);
         }
     }
 
@@ -111,11 +177,9 @@ public class MainActivity extends AppCompatActivity {
     public void logout() {
         try {
             SharedPrefsManager.getInstance().clearSession();
-            Intent intent = new Intent(this, InicioSesion.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
+            redirectToLogin();
         } catch (Exception e) {
+            Log.e(TAG, "Error during logout: " + e.getMessage());
             Toast.makeText(this, "Error al cerrar sesión", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
@@ -124,10 +188,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // Verificar sesión cada vez que la actividad vuelve al frente
-        if (!SharedPrefsManager.getInstance().isLoggedIn()) {
-            startActivity(new Intent(this, InicioSesion.class));
-            finish();
+        checkAndHandleUserSession();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        isProcessingClick = false;
+        if (binding != null) {
+            binding = null;
         }
     }
 }

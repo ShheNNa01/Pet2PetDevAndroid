@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -53,6 +54,7 @@ public class CreatePostActivity extends AppCompatActivity {
     private Uri selectedImageUri;
     private ProgressDialog progressDialog;
     private ApiService apiService;
+    private android.util.Log Log;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +74,14 @@ public class CreatePostActivity extends AppCompatActivity {
         initializeViews();
         checkPermissions();
         setupListeners();
+
+        // Verificar que CreatePostActivity existe
+        try {
+            Class.forName("com.example.frontpet2pet.ui.home.CreatePostActivity");
+            Log.d("MainActivity", "CreatePostActivity class found");
+        } catch (ClassNotFoundException e) {
+            Log.e("MainActivity", "CreatePostActivity class not found: " + e.getMessage());
+        }
     }
 
     private void initializeViews() {
