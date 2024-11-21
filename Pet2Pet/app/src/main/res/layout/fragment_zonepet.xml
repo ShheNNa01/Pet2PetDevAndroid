@@ -32,12 +32,16 @@
         app:layout_constraintTop_toBottomOf="@id/profileImage" />
 
     <!-- Pet Grid -->
+
+    <!-- Botón de Cerrar Sesión -->
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/petGrid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="124dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/userName">
 
@@ -48,9 +52,9 @@
             android:layout_height="80dp"
             android:layout_margin="8dp"
             android:background="@drawable/circle_border_coral"
+            android:contentDescription="Mascota Aslan"
             android:padding="3dp"
             android:scaleType="centerCrop"
-            android:contentDescription="Mascota Aslan"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -60,9 +64,9 @@
             android:layout_height="80dp"
             android:layout_margin="8dp"
             android:background="@drawable/circle_border_blue"
+            android:contentDescription="Mascota Sky"
             android:padding="3dp"
             android:scaleType="centerCrop"
-            android:contentDescription="Mascota Sky"
             app:layout_constraintStart_toEndOf="@id/pet1"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -72,9 +76,9 @@
             android:layout_height="80dp"
             android:layout_margin="8dp"
             android:background="@drawable/circle_border_coral"
+            android:contentDescription="Mascota Noche"
             android:padding="3dp"
             android:scaleType="centerCrop"
-            android:contentDescription="Mascota Noche"
             app:layout_constraintStart_toEndOf="@id/pet2"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -85,9 +89,9 @@
             android:layout_height="wrap_content"
             android:text="Aslan"
             android:textSize="14sp"
-            app:layout_constraintTop_toBottomOf="@id/pet1"
+            app:layout_constraintEnd_toEndOf="@id/pet1"
             app:layout_constraintStart_toStartOf="@id/pet1"
-            app:layout_constraintEnd_toEndOf="@id/pet1" />
+            app:layout_constraintTop_toBottomOf="@id/pet1" />
 
         <TextView
             android:id="@+id/Name2"
@@ -95,9 +99,9 @@
             android:layout_height="wrap_content"
             android:text="Sky"
             android:textSize="14sp"
-            app:layout_constraintTop_toBottomOf="@id/pet2"
+            app:layout_constraintEnd_toEndOf="@id/pet2"
             app:layout_constraintStart_toStartOf="@id/pet2"
-            app:layout_constraintEnd_toEndOf="@id/pet2" />
+            app:layout_constraintTop_toBottomOf="@id/pet2" />
 
         <TextView
             android:id="@+id/Name3"
@@ -105,9 +109,9 @@
             android:layout_height="wrap_content"
             android:text="Noche"
             android:textSize="14sp"
-            app:layout_constraintTop_toBottomOf="@id/pet3"
+            app:layout_constraintEnd_toEndOf="@id/pet3"
             app:layout_constraintStart_toStartOf="@id/pet3"
-            app:layout_constraintEnd_toEndOf="@id/pet3" />
+            app:layout_constraintTop_toBottomOf="@id/pet3" />
 
         <!-- Segunda Filas de mascotas creadas :), Se hace mas facil trabajarlo de esta manera pal que sea que se pregunte por que xD -->
         <ImageButton
@@ -117,9 +121,9 @@
             android:layout_margin="8dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/circle_border_black"
+            android:contentDescription="Mascota Avril"
             android:padding="3dp"
             android:scaleType="centerCrop"
-            android:contentDescription="Mascota Avril"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.163"
             app:layout_constraintStart_toStartOf="parent"
@@ -131,9 +135,9 @@
             android:layout_height="wrap_content"
             android:text="Avril"
             android:textSize="14sp"
-            app:layout_constraintTop_toBottomOf="@id/pet4"
+            app:layout_constraintEnd_toEndOf="@id/pet4"
             app:layout_constraintStart_toStartOf="@id/pet4"
-            app:layout_constraintEnd_toEndOf="@id/pet4" />
+            app:layout_constraintTop_toBottomOf="@id/pet4" />
 
         <ImageButton
             android:id="@+id/add"
@@ -141,10 +145,10 @@
             android:layout_height="80dp"
             android:layout_margin="8dp"
             android:background="@drawable/circle_border_blue"
-            android:src="@drawable/ic_add"
+            android:contentDescription="Agregar mascota"
             android:padding="20dp"
             android:scaleType="fitCenter"
-            android:contentDescription="Agregar mascota"
+            android:src="@drawable/ic_add"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.815"
             app:layout_constraintStart_toStartOf="parent"
@@ -162,7 +166,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Botón de Cerrar Sesión -->
     <Button
         android:id="@+id/btnLogout"
         android:layout_width="wrap_content"

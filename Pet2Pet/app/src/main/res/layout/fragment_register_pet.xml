@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.auth.register.RegisterActivity"
+    android:background="@drawable/zpback"
+    >
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout7"
+        android:layout_width="409dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="61dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="595dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:foregroundGravity="center">
+
+        <TextView
+            android:id="@+id/tvtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:text="¡¡ TU MASCOTA !!"
+            android:textAlignment="center"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/tvdescrip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:text="Vincula a tu amig@ en este espectacular viaje...🐾"
+            android:textAlignment="center"
+            android:textSize="17dp" />
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/imgcat"
+        android:layout_width="234dp"
+        android:layout_height="130dp"
+        android:src="@drawable/cat"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout7"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.275"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="161dp" />
+
+    <LinearLayout
+        android:id="@+id/lyname"
+        android:layout_width="409dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/lyPass"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:text="Nombre"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/edtName"
+            android:layout_width="360dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="20dp"
+            android:ems="10"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:hint="Como se llama tu mascota"
+            android:inputType="text"
+            android:textColor="#757575"
+            android:textColorHint="#BDBDBD" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lyLastName"
+        android:layout_width="409dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/lyEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lyPass">
+
+        <TextView
+            android:id="@+id/tvBreed"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:text="Raza"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/edtBreed"
+            android:layout_width="360dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="20dp"
+            android:ems="10"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:hint="Indicanos la raza,tipo,especie etc..."
+            android:inputType="text"
+            android:textColor="#757575"
+            android:textColorHint="#BDBDBD" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lyEmail"
+        android:layout_width="409dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/lyConFpass"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lyLastName">
+
+        <TextView
+            android:id="@+id/tvBirthDate"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:text="Cumpleaños"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/edtBirthDate"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:ems="10"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:hint="Cuentanos cuando cumple años tu mascota"
+            android:inputType="textEmailAddress"
+            android:textColor="#757575"
+            android:textColorHint="#BDBDBD" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lyPass"
+        android:layout_width="409dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/lyLastName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lyname">
+
+        <TextView
+            android:id="@+id/tvGender"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:text="Genero"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/edtGender"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:ems="10"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:hint="Indicanos que genero es tu mascota"
+            android:inputType="textPassword"
+            android:textColor="#757575"
+            android:textColorHint="#BDBDBD" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lyConFpass"
+        android:layout_width="409dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/buttonCrear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lyEmail">
+
+        <TextView
+            android:id="@+id/tvBiography"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:text="Biografia"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/edtpassConfirm"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:ems="10"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:hint="Cuentanos un poco de tu mascota"
+            android:inputType="textPassword"
+            android:textColor="#757575"
+            android:textColorHint="#BDBDBD" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonCrear"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="51dp"
+        android:layout_marginBottom="35dp"
+        android:background="@drawable/button_background"
+        android:fontFamily="@font/baloo_tamma_regular"
+        android:text="🐾Registrar Mascota🐾"
+        android:textColor="#eeede8"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lyConFpass" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
