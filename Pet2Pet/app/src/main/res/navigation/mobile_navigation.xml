@@ -5,79 +5,86 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_home">
 
+    <!-- Home Fragment con acción a CreatePost -->
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.frontpet2pet.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_home_to_createPost"
+            app:destination="@id/navigation_create_post" />
+    </fragment>
 
+    <!-- Dashboard Fragment -->
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.example.frontpet2pet.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
+    <!-- Notifications Fragment -->
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.example.frontpet2pet.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
 
+    <!-- Events Fragment -->
     <fragment
         android:id="@+id/navigation_events"
         android:name="com.example.frontpet2pet.ui.events.EventsFragment"
         android:label="@string/title_events"
         tools:layout="@layout/fragment_events" />
 
+    <!-- Profile Fragment -->
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.example.frontpet2pet.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile">
-
         <action
             android:id="@+id/action_navigation_profile_to_editProfileFragment"
-            app:destination="@id/editProfileFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:destination="@id/editProfileFragment" />
     </fragment>
 
+    <!-- Zone Pet Fragment -->
     <fragment
         android:id="@+id/navigation_zonepet"
         android:name="com.example.frontpet2pet.ui.profile.ZonaPetFragment"
         android:label="zonepet"
         tools:layout="@layout/fragment_zonepet">
-
         <action
             android:id="@+id/action_zonePetFragment_to_registerPetFragment"
             app:destination="@id/registerPetFragment" />
     </fragment>
 
+    <!-- Register Pet Fragment -->
     <fragment
         android:id="@+id/registerPetFragment"
         android:name="com.example.frontpet2pet.ui.auth.register.RegisterPet"
         android:label="Registro de Mascota"
         tools:layout="@layout/fragment_register_pet" />
 
+    <!-- Edit Profile Fragment -->
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.example.frontpet2pet.ui.profile.EditProfileFragment"
         android:label="Editar Perfil"
         tools:layout="@layout/fragment_edit_profile" />
 
+    <!-- Create Post Activity -->
     <activity
         android:id="@+id/navigation_create_post"
         android:name="com.example.frontpet2pet.ui.home.CreatePostActivity"
         android:label="Crear Publicación"
         tools:layout="@layout/activity_create_post" />
 
+    <!-- Login Activity -->
     <activity
         android:id="@+id/navigation_iniciar"
         android:name="com.example.frontpet2pet.ui.inicio.InicioSesion"
         android:label="@string/title_inicia"
         tools:layout="@layout/activity_inicio_sesion" />
 
-    </navigation>
-
+</navigation>

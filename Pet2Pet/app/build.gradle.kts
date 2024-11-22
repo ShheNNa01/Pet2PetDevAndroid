@@ -67,6 +67,10 @@ dependencies {
     // SwipeRefreshLayout
     implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
+    //Navegación
+    implementation ("androidx.navigation:navigation-fragment:2.7.5")
+    implementation ("androidx.navigation:navigation-ui:2.7.5")
+
     // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

@@ -58,7 +58,14 @@
         <activity
             android:name=".ui.home.CreatePostActivity"
             android:exported="false"
-            android:label="Crear Publicación" />
+            android:label="Crear Publicación"
+            android:theme="@style/Theme.FrontPet2Pet"
+            android:windowSoftInputMode="adjustResize"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
 
         <!-- Recuperar contraseña -->
         <activity

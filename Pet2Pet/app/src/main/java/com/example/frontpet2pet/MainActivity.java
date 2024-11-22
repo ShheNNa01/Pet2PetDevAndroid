@@ -75,12 +75,30 @@ public class MainActivity extends AppCompatActivity {
         try {
             FloatingActionButton fabCreatePost = binding.fabCreatePost;
             if (fabCreatePost != null) {
-                configureFabButton(fabCreatePost);
+                Log.d(TAG, "FAB encontrado");
+                fabCreatePost.setVisibility(View.VISIBLE);
+
+                fabCreatePost.setOnClickListener(v -> {
+                    Log.d(TAG, "FAB clicked");
+                    try {
+                        if (SharedPrefsManager.getInstance().isLoggedIn()) {
+                            Log.d(TAG, "Usuario logueado, iniciando navegación");
+                            launchCreatePost();
+                        } else {
+                            Log.d(TAG, "Usuario no logueado");
+                            Toast.makeText(this, "Debes iniciar sesión primero",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (Exception e) {
+                        Log.e(TAG, "Error en click listener: " + e.getMessage());
+                        e.printStackTrace();
+                    }
+                });
             } else {
-                Log.e(TAG, "FAB is null");
+                Log.e(TAG, "FAB es null");
             }
         } catch (Exception e) {
-            Log.e(TAG, "Error in setupFabCreatePost: " + e.getMessage());
+            Log.e(TAG, "Error en setupFabCreatePost: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -118,10 +136,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void launchCreatePost() {
-        Log.d(TAG, "Launching CreatePostActivity");
-        Intent intent = new Intent(this, CreatePostActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivityForResult(intent, CREATE_POST_REQUEST);
+        try {
+            // Usar Intent directo en lugar de navegación
+            Intent intent = new Intent(this, CreatePostActivity.class);
+            startActivity(intent);
+        } catch (Exception e) {
+            Log.e(TAG, "Error launching CreatePostActivity", e);
+            Toast.makeText(this,
+                    "Error al abrir la pantalla de crear post",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void handleNotLoggedInUser() {

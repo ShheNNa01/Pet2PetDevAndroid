@@ -22,8 +22,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.frontpet2pet.R;
+import com.example.frontpet2pet.api.ApiClient;
 import com.example.frontpet2pet.api.ApiService;
-import com.example.frontpet2pet.api.RetrofitClient;
 import com.example.frontpet2pet.data.local.SharedPrefsManager;
 import com.example.frontpet2pet.data.models.response.PostResponse;
 
@@ -43,6 +43,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CreatePostActivity extends AppCompatActivity {
+    private static final String TAG = "CreatePostActivity";
     private static final int PICK_IMAGE_REQUEST = 1;
     private static final int PERMISSION_REQUEST_CODE = 2;
     private static final int MAX_IMAGE_SIZE = 1024 * 1024; // 1MB
@@ -54,7 +55,6 @@ public class CreatePostActivity extends AppCompatActivity {
     private Uri selectedImageUri;
     private ProgressDialog progressDialog;
     private ApiService apiService;
-    private android.util.Log Log;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,20 +68,12 @@ public class CreatePostActivity extends AppCompatActivity {
             return;
         }
 
-        // Inicializar ApiService
-        apiService = RetrofitClient.getInstance().create(ApiService.class);
+        // Inicializar ApiService usando ApiClient
+        apiService = ApiClient.getInstance().getApiService();
 
         initializeViews();
         checkPermissions();
         setupListeners();
-
-        // Verificar que CreatePostActivity existe
-        try {
-            Class.forName("com.example.frontpet2pet.ui.home.CreatePostActivity");
-            Log.d("MainActivity", "CreatePostActivity class found");
-        } catch (ClassNotFoundException e) {
-            Log.e("MainActivity", "CreatePostActivity class not found: " + e.getMessage());
-        }
     }
 
     private void initializeViews() {
@@ -169,10 +161,12 @@ public class CreatePostActivity extends AppCompatActivity {
             RequestBody descriptionBody = createRequestBody(description);
 
             // Usar los nuevos métodos de SharedPrefsManager
-            String userId = SharedPrefsManager.getInstance().getPostUserId();
+            String userId = SharedPrefsManager.getInstance().getUserIdAsString();
             RequestBody userIdBody = createRequestBody(userId);
             // Usar userId también como petId por ahora
             RequestBody petIdBody = createRequestBody(userId);
+
+            Log.d(TAG, "Iniciando subida de post con userId: " + userId);
 
             Call<PostResponse> call = apiService.createPost(
                     imagePart,
@@ -184,16 +178,19 @@ public class CreatePostActivity extends AppCompatActivity {
             call.enqueue(new Callback<PostResponse>() {
                 @Override
                 public void onResponse(Call<PostResponse> call, Response<PostResponse> response) {
+                    Log.d(TAG, "Respuesta recibida: " + response.code());
                     handleApiResponse(response);
                 }
 
                 @Override
                 public void onFailure(Call<PostResponse> call, Throwable t) {
+                    Log.e(TAG, "Error en la llamada: " + t.getMessage());
                     handleApiError(t);
                 }
             });
 
         } catch (IOException e) {
+            Log.e(TAG, "Error procesando imagen: " + e.getMessage());
             handleException(e);
         }
     }
@@ -215,6 +212,7 @@ public class CreatePostActivity extends AppCompatActivity {
 
     private void handleApiResponse(Response<PostResponse> response) {
         if (response.isSuccessful() && response.body() != null) {
+            Log.d(TAG, "Post creado exitosamente");
             updatePostStatus("SUCCESS");
         } else {
             String errorMessage = "Error al crear el post";
@@ -222,7 +220,9 @@ public class CreatePostActivity extends AppCompatActivity {
                 if (response.errorBody() != null) {
                     errorMessage = response.errorBody().string();
                 }
+                Log.e(TAG, "Error en la respuesta: " + errorMessage);
             } catch (IOException e) {
+                Log.e(TAG, "Error leyendo error body: " + e.getMessage());
                 e.printStackTrace();
             }
             updatePostStatus("ERROR");
@@ -251,12 +251,14 @@ public class CreatePostActivity extends AppCompatActivity {
         updatePostStatus("ERROR");
         String errorMessage = "Error de conexión: " +
                 (t.getMessage() != null ? t.getMessage() : "Error desconocido");
+        Log.e(TAG, "Error de API: " + errorMessage);
         Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
     }
 
     private void handleException(Exception e) {
         updatePostStatus("ERROR");
         e.printStackTrace();
+        Log.e(TAG, "Excepción: " + e.getMessage());
         Toast.makeText(this, "Error al procesar la imagen", Toast.LENGTH_SHORT).show();
     }
 

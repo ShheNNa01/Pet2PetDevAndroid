@@ -54,10 +54,17 @@ public class HomeFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(this::loadPosts);
 
         // Configurar FAB para crear nuevo post
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) FloatingActionButton fab = root.findViewById(R.id.fabCreatePost);
+        // En HomeFragment.java
+        FloatingActionButton fab = root.findViewById(R.id.fabCreatePost);
         fab.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), CreatePostActivity.class);
-            startActivity(intent);
+            // Usar intent directo en lugar de navegación
+            try {
+                Intent intent = new Intent(getActivity(), CreatePostActivity.class);
+                startActivity(intent);
+            } catch (Exception e) {
+                Toast.makeText(getContext(), "Error al abrir la pantalla", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
         });
 
         // Cargar posts iniciales

@@ -49,7 +49,7 @@ public interface ApiService {
 
     // Endpoints para posts
     @Multipart
-    @POST("api/posts/create")
+    @POST("posts/create")
     Call<PostResponse> createPost(
             @Part MultipartBody.Part image,
             @Part("description") RequestBody description,
