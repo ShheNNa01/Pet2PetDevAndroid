@@ -45,7 +45,8 @@
         app:backgroundTint="?attr/colorPrimary"
         app:tint="@android:color/white"
         app:rippleColor="@android:color/white"
-        app:borderWidth="0dp"/>
+        app:borderWidth="0dp"
+        />
 
     <!-- Barra de navegación inferior -->
     <com.google.android.material.bottomnavigation.BottomNavigationView

@@ -3,6 +3,7 @@ package com.example.frontpet2pet.ui.home;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,8 +36,10 @@ public class HomeFragment extends Fragment {
     @SuppressLint("MissingInflatedId")
     @Nullable
     @Override
+
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
         // Inflar el layout del fragment
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
@@ -56,16 +59,22 @@ public class HomeFragment extends Fragment {
         // Configurar FAB para crear nuevo post
         // En HomeFragment.java
         FloatingActionButton fab = root.findViewById(R.id.fabCreatePost);
-        fab.setOnClickListener(v -> {
-            // Usar intent directo en lugar de navegación
-            try {
-                Intent intent = new Intent(getActivity(), CreatePostActivity.class);
-                startActivity(intent);
-            } catch (Exception e) {
-                Toast.makeText(getContext(), "Error al abrir la pantalla", Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
-            }
-        });
+        if (fab != null) {
+            fab.setOnClickListener(v -> {
+                Log.d("HomeFragment", "FAB presionado.");
+                try {
+                    Intent intent = new Intent(getActivity(), CreatePostActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(getContext(), "Redirigiendo a Crear Post", Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    Toast.makeText(getContext(), "Error al abrir Crear Post", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+            });
+        } else {
+            Log.e("HomeFragment", "FAB no encontrado.");
+        }
+
 
         // Cargar posts iniciales
         loadPosts();

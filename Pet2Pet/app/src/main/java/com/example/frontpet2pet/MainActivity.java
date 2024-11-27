@@ -72,34 +72,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupFabCreatePost() {
-        try {
-            FloatingActionButton fabCreatePost = binding.fabCreatePost;
-            if (fabCreatePost != null) {
-                Log.d(TAG, "FAB encontrado");
-                fabCreatePost.setVisibility(View.VISIBLE);
-
-                fabCreatePost.setOnClickListener(v -> {
-                    Log.d(TAG, "FAB clicked");
-                    try {
-                        if (SharedPrefsManager.getInstance().isLoggedIn()) {
-                            Log.d(TAG, "Usuario logueado, iniciando navegación");
-                            launchCreatePost();
-                        } else {
-                            Log.d(TAG, "Usuario no logueado");
-                            Toast.makeText(this, "Debes iniciar sesión primero",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    } catch (Exception e) {
-                        Log.e(TAG, "Error en click listener: " + e.getMessage());
-                        e.printStackTrace();
-                    }
-                });
-            } else {
-                Log.e(TAG, "FAB es null");
-            }
-        } catch (Exception e) {
-            Log.e(TAG, "Error en setupFabCreatePost: " + e.getMessage());
-            e.printStackTrace();
+        FloatingActionButton fabCreatePost = binding.fabCreatePost;
+        if (fabCreatePost != null) {
+            fabCreatePost.setOnClickListener(v -> {
+                try {
+                    Intent intent = new Intent(this, CreatePostActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(this, "Hora de ponerse creativo", Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    Toast.makeText(this, "Ups..Algo fallo", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+            });
+        } else {
+            Log.e("MainActivity", "FAB es nulo, no se pudo configurar.");
         }
     }
 
